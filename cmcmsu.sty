@@ -1,0 +1,16 @@
+% cmcmsu.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cmcmsu}[2026/03/01 CMC MSU beamer theme]
+
+% Self-locating theme root directory
+\RequirePackage{currfile}
+\newcommand{\cmcmsuRoot}{\currfiledir}
+
+% Load internal modules from sty/
+\RequirePackage{\cmcmsuRoot sty/cmcmsu-options}
+\RequirePackage{\cmcmsuRoot sty/cmcmsu-fonts}
+\RequirePackage{\cmcmsuRoot sty/cmcmsu-colors}
+\RequirePackage{\cmcmsuRoot sty/cmcmsu-beamer}
+\RequirePackage{\cmcmsuRoot sty/cmcmsu-title}
+\RequirePackage{\cmcmsuRoot sty/cmcmsu-sections}
+\RequirePackage{\cmcmsuRoot sty/cmcmsu-tcb}

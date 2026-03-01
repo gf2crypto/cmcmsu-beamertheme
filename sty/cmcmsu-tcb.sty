@@ -1,0 +1,109 @@
+% sty/cmcmsu-tcb.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cmcmsu-tcb}[2026/03/01 cmcmsu tcb theorems and blocks]
+
+\RequirePackage{\cmcmsuRoot sty/cmcmsu-options}
+\RequirePackage{\cmcmsuRoot sty/cmcmsu-colors}
+
+\RequirePackage[
+    theorems,
+    skins,
+    breakable
+]{tcolorbox}
+\RequirePackage{varwidth}
+
+\tcbset{
+    cmcmsu/common/.style={
+            enhanced,
+            breakable,
+            frame hidden,
+            interior hidden,
+            boxsep=0pt,
+            left=6mm,   % отступ текста от полосы
+            right=0mm,
+            top=1mm,
+            bottom=1mm,
+            before skip=6pt,
+            after skip=6pt,
+            borderline west={1mm}{0pt}{cmcmsuRed}, % будет переопределяться в стилях ниже
+            fonttitle=\bfseries,
+            coltitle=cmcmsuRed, % будет переопределяться
+            colbacktitle=white,
+            boxed title style={frame hidden, interior hidden, boxsep=0pt},
+            attach boxed title to top left={xshift=6mm,yshift=0mm},
+            % Чтобы заголовок был "строкой", а текст начинался ниже:
+            after title=\par\smallskip,
+        },
+
+    cmcmsu/defstyle/.style={
+            cmcmsu/common,
+            borderline west={1mm}{0pt}{cmcmsuGreen},
+            coltitle=cmcmsuGreen,
+        },
+
+    cmcmsu/propstyle/.style={
+            cmcmsu/common,
+            borderline west={1mm}{0pt}{cmcmsuRed},
+            coltitle=cmcmsuRed,
+        },
+
+    cmcmsu/examplestyle/.style={
+            cmcmsu/common,
+            borderline west={1mm}{0pt}{cmcmsuBlue},
+            coltitle=cmcmsuBlue,
+        },
+}
+% Proof styling (ok to keep)
+\tcolorboxenvironment{proof}{%
+    blanker,
+    breakable,
+    left=5mm,
+    before skip=10pt,
+    after skip=10pt,
+    borderline west={1mm}{0pt}{cmcmsuRed!70!white}
+}
+
+% --- Keep only: definition, proposition, theorem ---
+\newtcbtheorem[number within=section]{definition}{\cmcmsutr{Definition}}%
+{cmcmsu/defstyle}{def}
+
+\newtcbtheorem[number within=section]{proposition}{\cmcmsutr{Proposition}}%
+{cmcmsu/propstyle}{prop}
+
+\newtcbtheorem[number within=section]{theorem}{\cmcmsutr{Theorem}}%
+{cmcmsu/propstyle}{thm}
+
+% Unnumbered starred variants
+\newtcbtheorem[use counter from=definition, numbered=no]{definition*}{\cmcmsutr{Definition}}%
+{cmcmsu/defstyle}{def*}
+
+\newtcbtheorem[use counter from=proposition, numbered=no]{proposition*}{\cmcmsutr{Proposition}}%
+{cmcmsu/propstyle}{prop*}
+
+\newtcbtheorem[use counter from=theorem, numbered=no]{theorem*}{\cmcmsutr{Theorem}}%
+{cmcmsu/propstyle}{thm*}
+
+% --- Beamer blocks mapping ---
+% block -> definition style
+\setbeamertemplate{block begin}{%
+    \begin{tcolorbox}[cmcmsu/defstyle, title=\insertblocktitle, breakable]%
+        }
+        \setbeamertemplate{block end}{%
+    \end{tcolorbox}%
+}
+
+% alertblock -> theorem style
+\setbeamertemplate{block alerted begin}{%
+    \begin{tcolorbox}[cmcmsu/propstyle, title=\insertblocktitle, breakable]%
+        }
+        \setbeamertemplate{block alerted end}{%
+    \end{tcolorbox}%
+}
+
+% exampleblock -> example style
+\setbeamertemplate{block example begin}{%
+    \begin{tcolorbox}[cmcmsu/examplestyle, title=\insertblocktitle, breakable]%
+        }
+        \setbeamertemplate{block example end}{%
+    \end{tcolorbox}%
+}

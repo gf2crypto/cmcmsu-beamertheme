@@ -1,0 +1,49 @@
+% sty/cmcmsu-options.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cmcmsu-options}[2026/03/01 cmcmsu options]
+
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=cmcmsu,prefix=cmcmsu@}
+
+% Feature toggles
+\DeclareBoolOption[true]{titlebackground}
+\DeclareBoolOption[true]{sectiontransition}
+\DeclareBoolOption[true]{cornerlogo}
+
+% --- pdfLaTeX font options ---
+% font:  paratype | default
+\DeclareStringOption[paratype]{font}
+
+% mathfont:  newtx | cm | stix2
+\DeclareStringOption[newtx]{mathfont}
+
+\ProcessKeyvalOptions*
+
+% Core deps
+\RequirePackage{iftex}
+\RequirePackage{etoolbox}
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\RequirePackage{hyperref}
+\RequirePackage{caption}
+\RequirePackage{translator}
+
+% Images live inside the theme directory
+\graphicspath{{\cmcmsuRoot images/}}
+
+% Translator defaults (as in your preamble)
+\uselanguage{Russian}
+\languagepath{Russian}
+
+% Safe translation helper
+\newcommand{\cmcmsutr}[1]{%
+    \ifcsdef{translate}{\translate{#1}}{#1}%
+}
+
+% Minimal translations used by this theme
+\newtranslation[to=Russian]{Outline}{План}
+\newtranslation[to=Russian]{Definition}{Определение}
+\newtranslation[to=Russian]{Theorem}{Теорема}
+\newtranslation[to=Russian]{Proposition}{Утверждение}
+\newtranslation[to=Russian]{Example}{Пример}
