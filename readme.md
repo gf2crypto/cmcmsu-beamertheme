@@ -94,6 +94,78 @@ project/
  └── cmcmsu-beamertheme/
 ```
 
+### Global installation
+
+Clone or download the repository to your system.
+
+#### 1. Locate your `TEXMFHOME` directory
+
+Run the following command in a terminal:
+
+```bash
+kpsewhich -var-value TEXMFHOME
+```
+
+Suppose the returned directory is:
+
+```bash
+~/Library/texmf
+```
+
+(This is typical for macOS; on Linux it is usually `~/texmf`.)
+
+---
+
+#### 2. Create the required directory structure
+
+Create the directory `tex/latex` inside your `TEXMFHOME`:
+
+```bash
+mkdir -p ~/Library/texmf/tex/latex
+```
+
+---
+
+#### 3. Create a symbolic link to the theme
+
+Create a symbolic link from the repository directory
+`<path>/cmcmsu-beamertheme` to your local TeX tree:
+
+```bash
+ln -s /ABS/PATH/TO/repo/cmcmsu-beamertheme \
+~/Library/texmf/tex/latex/cmcmsu-beamertheme
+```
+
+Replace `/ABS/PATH/TO/repo` with the absolute path to the cloned repository.
+
+---
+
+#### 4. Update the LaTeX filename database
+
+Run:
+
+```bash
+mktexlsr ~/Library/texmf
+```
+
+(Alternatively, in most TeX Live installations, simply run `mktexlsr`.)
+
+---
+
+#### 5. Verify the installation
+
+Check that LaTeX can find the theme:
+
+```bash
+kpsewhich beamerthemecmcmsu.sty
+```
+
+The installation is successful if the output looks like:
+
+```bash
+/ABS/PATH/TO/repo/cmcmsu-beamertheme/beamerthemecmcmsu.sty
+```
+
 ---
 
 ## Usage
