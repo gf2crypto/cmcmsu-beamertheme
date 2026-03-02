@@ -1,6 +1,6 @@
 % sty/cmcmsu-tcb.sty
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{cmcmsu-tcb}[2026/03/01 cmcmsu tcb theorems and blocks]
+\ProvidesPackage{sty/cmcmsu-tcb}[2026/03/01 cmcmsu tcb theorems and blocks]
 
 \RequirePackage{\cmcmsuRoot sty/cmcmsu-options}
 \RequirePackage{\cmcmsuRoot sty/cmcmsu-colors}
@@ -34,24 +34,21 @@
             % Чтобы заголовок был "строкой", а текст начинался ниже:
             after title=\par\smallskip,
         },
-
     cmcmsu/defstyle/.style={
             cmcmsu/common,
             borderline west={1mm}{0pt}{cmcmsuGreen},
             coltitle=cmcmsuGreen,
         },
-
     cmcmsu/propstyle/.style={
             cmcmsu/common,
             borderline west={1mm}{0pt}{cmcmsuRed},
             coltitle=cmcmsuRed,
         },
-
     cmcmsu/examplestyle/.style={
             cmcmsu/common,
             borderline west={1mm}{0pt}{cmcmsuBlue},
             coltitle=cmcmsuBlue,
-        },
+        }
 }
 % Proof styling (ok to keep)
 \tcolorboxenvironment{proof}{%
