@@ -45,6 +45,19 @@
     \makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
 }
 
+\setbeamercolor{block title example}{fg=cmcmsuBlue, bg=white}
+\setbeamercolor{block body example}{fg=cmcmsuBlue, bg=white}
+
+\addtobeamertemplate{block example begin}{}{
+    \setbeamercolor{itemize item}{fg=cmcmsuBlue}%
+    \setbeamercolor{itemize subitem}{fg=cmcmsuBlue}%
+    \setbeamercolor{itemize subsubitem}{fg=cmcmsuBlue}%
+    \setbeamercolor{enumerate item}{fg=cmcmsuBlue}%
+    \setbeamercolor{enumerate subitem}{fg=cmcmsuBlue}%
+    \setbeamercolor{enumerate subsubitem}{fg=cmcmsuBlue}%
+}
+
+
 % Corner logo (optional) from images/
 \ifcmcmsu@cornerlogo
     \logo{%
