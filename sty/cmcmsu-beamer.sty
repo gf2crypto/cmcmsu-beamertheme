@@ -2,8 +2,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sty/cmcmsu-beamer}[2026/03/01 cmcmsu beamer base]
 
-\RequirePackage{\cmcmsuRoot sty/cmcmsu-options}
-\RequirePackage{\cmcmsuRoot sty/cmcmsu-colors}
+\RequirePackage{sty/cmcmsu-options}
+\RequirePackage{sty/cmcmsu-colors}
 
 \mode<presentation>{
     \usetheme{boxes}
@@ -74,8 +74,8 @@
 % Corner logo (optional) from images/
 \ifcmcmsu@cornerlogo
     \logo{%
-        \IfFileExists{\cmcmsuRoot images/msu-cmc-logo2.png}{%
-            \raisebox{-0.4cm}{\includegraphics[height=1cm]{msu-cmc-logo2.png}}%
+      \IfFileExists{msu-cmc-logo2.png}{%
+        \raisebox{-0.4cm}{\includegraphics[height=1cm]{msu-cmc-logo2.png}}%
         }{}%
     }
 \fi

@@ -2,12 +2,12 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sty/cmcmsu-title}[2026/03/01 cmcmsu title page]
 
-\RequirePackage{\cmcmsuRoot sty/cmcmsu-options}
-\RequirePackage{\cmcmsuRoot sty/cmcmsu-colors}
+\RequirePackage{sty/cmcmsu-options}
+\RequirePackage{sty/cmcmsu-colors}
 
 \ifcmcmsu@titlebackground
     \newcommand{\cmcmsu@titlebackground}{%
-        \IfFileExists{\cmcmsuRoot images/msu-cmc-logo.png}{%
+        \IfFileExists{msu-cmc-logo.png}{%
             \usebackgroundtemplate{%
                 \begin{tikzpicture}[remember picture,overlay]
                     \node[opacity=0.2, xshift=7cm,yshift=3cm] at (current page.south west) {%

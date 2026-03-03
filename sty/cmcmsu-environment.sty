@@ -2,8 +2,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{sty/cmcmsu-environment}[2026/03/01 cmcmsu theorems and blocks]
 
-\RequirePackage{\cmcmsuRoot sty/cmcmsu-options}
-\RequirePackage{\cmcmsuRoot sty/cmcmsu-colors}
+\RequirePackage{sty/cmcmsu-options}
+\RequirePackage{sty/cmcmsu-colors}
 
 
 \AtBeginEnvironment{definition}{
@@ -64,9 +64,6 @@
 }
 
 
-\addto\captionsrussian{
-  \renewcommand{\proofname}{Доказательство}
-}
 \AtBeginEnvironment{proof}{
     \setbeamercolor{block title}{fg=structure.fg, bg=white}
     \setbeamercolor{block body}{fg=black, bg=white}

@@ -8,16 +8,11 @@
 }
 \ProcessOptions\relax
 
-% Self-locating theme root directory
-\RequirePackage{currfile}
-\newcommand{\cmcmsuRoot}{\currfiledir}
-
 % Load internal modules from sty/
-\RequirePackageWithOptions{\cmcmsuRoot sty/cmcmsu-options}
-\RequirePackage{\cmcmsuRoot sty/cmcmsu-fonts}
-\RequirePackage{\cmcmsuRoot sty/cmcmsu-colors}
-\RequirePackage{\cmcmsuRoot sty/cmcmsu-beamer}
-\RequirePackage{\cmcmsuRoot sty/cmcmsu-title}
-\RequirePackage{\cmcmsuRoot sty/cmcmsu-sections}
-\RequirePackage{\cmcmsuRoot sty/cmcmsu-environment}
-% \RequirePackage{\cmcmsuRoot sty/cmcmsu-tcb}
+\RequirePackageWithOptions{sty/cmcmsu-options}
+\RequirePackage{sty/cmcmsu-fonts}
+\RequirePackage{sty/cmcmsu-colors}
+\RequirePackage{sty/cmcmsu-beamer}
+\RequirePackage{sty/cmcmsu-title}
+\RequirePackage{sty/cmcmsu-sections}
+\RequirePackage{sty/cmcmsu-environment}
