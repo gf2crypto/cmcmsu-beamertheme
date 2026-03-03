@@ -2,4 +2,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerthemecmcmsu}[2026/03/01 Beamer theme wrapper for cmcmsu]
 
-\RequirePackage{cmcmsu}
+% Forward any beamer theme options to the cmcmsu package
+\DeclareOptionBeamer*{% \PassOptionsToPackage{\CurrentOption}{cmcmsu}%
+}%
+\ProcessOptionsBeamer%
+
+\RequirePackageWithOptions{cmcmsu}

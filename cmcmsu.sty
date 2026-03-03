@@ -2,12 +2,18 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{cmcmsu}[2026/03/01 CMC MSU beamer theme]
 
+% 1) Forward package options to internal option module
+\DeclareOption*{%
+  \PassOptionsToPackage{\CurrentOption}{cmcmsu-options}%
+}
+\ProcessOptions\relax
+
 % Self-locating theme root directory
 \RequirePackage{currfile}
 \newcommand{\cmcmsuRoot}{\currfiledir}
 
 % Load internal modules from sty/
-\RequirePackage{\cmcmsuRoot sty/cmcmsu-options}
+\RequirePackageWithOptions{\cmcmsuRoot sty/cmcmsu-options}
 \RequirePackage{\cmcmsuRoot sty/cmcmsu-fonts}
 \RequirePackage{\cmcmsuRoot sty/cmcmsu-colors}
 \RequirePackage{\cmcmsuRoot sty/cmcmsu-beamer}
