@@ -2,17 +2,313 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{cmcmsu}[2026/03/01 CMC MSU beamer theme]
 
-% 1) Forward package options to internal option module
-\DeclareOption*{%
-  \PassOptionsToPackage{\CurrentOption}{cmcmsu-options}%
-}
-\ProcessOptions\relax
+% Options
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=cmcmsu,prefix=cmcmsu@}
 
-% Load internal modules from sty/
-\RequirePackageWithOptions{sty/cmcmsu-options}
-\RequirePackage{sty/cmcmsu-fonts}
-\RequirePackage{sty/cmcmsu-colors}
-\RequirePackage{sty/cmcmsu-beamer}
-\RequirePackage{sty/cmcmsu-title}
-\RequirePackage{sty/cmcmsu-sections}
-\RequirePackage{sty/cmcmsu-environment}
+% Feature toggles
+\DeclareBoolOption[true]{titlebackground}
+\DeclareBoolOption[true]{sectiontransition}
+\DeclareBoolOption[true]{cornerlogo}
+
+% --- pdfLaTeX font options ---
+% font:  paratype | default
+\DeclareStringOption[paratype]{font}
+
+% mathfont:  newtx | cm | stix2
+\DeclareStringOption[newtx]{mathfont}
+
+\ProcessKeyvalOptions*
+
+% Core deps
+\RequirePackage{iftex}
+\RequirePackage{etoolbox}
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\RequirePackage{hyperref}
+\RequirePackage{caption}
+\RequirePackage{translator}
+
+% Images live inside the theme directory
+\makeatletter
+\g@addto@macro\Ginput@path{{cmcmsu-beamertheme/images/}}
+\makeatother
+
+% Translator defaults (as in your preamble)
+\uselanguage{Russian}
+\languagepath{Russian}
+
+% Safe translation helper
+\newcommand{\cmcmsutr}[1]{%
+    \ifcsdef{translate}{\translate{#1}}{#1}%
+}
+
+% Minimal translations used by this theme
+\newtranslation[to=Russian]{Outline}{План}
+\newtranslation[to=Russian]{Definition}{Определение}
+\newtranslation[to=Russian]{Theorem}{Теорема}
+\newtranslation[to=Russian]{Proposition}{Утверждение}
+\newtranslation[to=Russian]{Example}{Пример}
+
+% Fonts
+\ifPDFTeX
+    % pdfLaTeX: keep defaults
+    % --- pdfLaTeX: modern defaults---
+    % Text fonts
+    \ifdefstring{\cmcmsu@font}{paratype}{%
+        \RequirePackage{paratype}%
+    }{%
+        % default: do nothing
+    }%
+
+    % Math fonts
+    \ifdefstring{\cmcmsu@mathfont}{newtx}{%
+        \RequirePackage{newtxmath}%
+    }{%
+        \ifdefstring{\cmcmsu@mathfont}{stix2}{%
+            \RequirePackage{stix2-type1}%
+        }{%
+            % cm: do nothing (Computer Modern math)
+        }%
+    }%
+\else
+    \RequirePackage{fontspec}
+    \RequirePackage{unicode-math}
+    \setsansfont{PT Sans}
+    \setmathfont{texgyretermes-math.otf}
+\fi
+
+% Custom colors
+\definecolor{cmcmsuBlue}{RGB}{3,106,150}
+\definecolor{cmcmsuRed}{RGB}{203,58,42}
+\definecolor{cmcmsuYellow}{RGB}{255,255,128}
+\definecolor{cmcmsuGreen}{RGB}{20,113,10}
+\definecolor{cmcmsuPink}{RGB}{163,20,77}
+\definecolor{cmcmsuPurple}{RGB}{100,74,201}
+\definecolor{cmcmsuOrange}{RGB}{163,77,20}
+\definecolor{cmcmsuBackground}{RGB}{245,245,245}
+
+% Beamer configuration
+\mode<presentation>{
+    \usetheme{boxes}
+    \usecolortheme{lily}
+}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{caption}[numbered]
+
+\setbeamercolor{structure}{fg=cmcmsuRed}
+
+\setbeamercolor{alerted text}{fg=cmcmsuRed}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=structure.fg,
+    filecolor=structure.fg,
+    runcolor=structure.fg,
+    urlcolor=structure.fg,
+    citecolor=structure.fg,
+    pdfpagemode=FullScreen
+}
+\urlstyle{same}
+
+% Dash itemize markers
+\newlength{\cmcmsu@dashitemwidth}
+\setlength{\cmcmsu@dashitemwidth}{1.8ex}
+
+\setbeamertemplate{itemize item}{%
+    \usebeamercolor[fg]{itemize item}%
+    \makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
+}
+\setbeamertemplate{itemize subitem}{%
+    \usebeamercolor[fg]{itemize subitem}%
+    \makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
+}
+\setbeamertemplate{itemize subsubitem}{%
+    \usebeamercolor[fg]{itemize subsubitem}%
+    \makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
+}
+
+% Styles of basic block
+\setbeamercolor{block title}{fg=cmcmsuBlue, bg=white}
+\setbeamercolor{block body}{bg=white}
+
+\addtobeamertemplate{block begin}{}{
+    \setbeamercolor{itemize item}{fg=cmcmsuBlue}%
+    \setbeamercolor{itemize subitem}{fg=cmcmsuBlue}%
+    \setbeamercolor{itemize subsubitem}{fg=cmcmsuBlue}%
+    \setbeamercolor{enumerate item}{fg=cmcmsuBlue}%
+    \setbeamercolor{enumerate subitem}{fg=cmcmsuBlue}%
+    \setbeamercolor{enumerate subsubitem}{fg=cmcmsuBlue}%
+}
+
+\setbeamercolor{block title example}{fg=cmcmsuGreen, bg=white}
+\setbeamercolor{block body example}{bg=white}
+
+\addtobeamertemplate{block example begin}{
+    \setbeamercolor{itemize item}{fg=cmcmsuGreen}%
+    \setbeamercolor{itemize subitem}{fg=cmcmsuGreen}%
+    \setbeamercolor{itemize subsubitem}{fg=cmcmsuGreen}%
+    \setbeamercolor{enumerate item}{fg=cmcmsuGreen}%
+    \setbeamercolor{enumerate subitem}{fg=cmcmsuGreen}%
+    \setbeamercolor{enumerate subsubitem}{fg=cmcmsuGreen}%
+}{}
+
+
+% Corner logo (optional) from images/
+\ifcmcmsu@cornerlogo
+    \logo{%
+      \IfFileExists{msu-cmc-logo2.png}{%
+        \raisebox{-0.4cm}{\includegraphics[height=1cm]{msu-cmc-logo2.png}}%
+        }{}%
+    }
+\fi
+
+% Titlepage
+\ifcmcmsu@titlebackground
+    \newcommand{\cmcmsu@titlebackground}{%
+        \IfFileExists{msu-cmc-logo.png}{%
+            \usebackgroundtemplate{%
+                \begin{tikzpicture}[remember picture,overlay]
+                    \node[opacity=0.2, xshift=7cm,yshift=3cm] at (current page.south west) {%
+                        \includegraphics[width=1.3\textwidth, keepaspectratio]{msu-cmc-logo.png}%
+                    };
+                \end{tikzpicture}%
+            }%
+        }{}%
+    }
+\else
+    \newcommand{\cmcmsu@titlebackground}{}
+\fi
+
+\renewcommand{\maketitle}{%
+    {%
+            \setbeamercolor{author}{fg=cmcmsuBlue!50!black}%
+            \setbeamercolor{institute}{fg=cmcmsuBlue!50!black}%
+            \setbeamercolor{date}{fg=cmcmsuBlue!50!black}%
+            \setbeamertemplate{logo}{}%
+            \cmcmsu@titlebackground
+            \begin{frame}
+                \titlepage
+            \end{frame}
+        }%
+}
+
+% Transition frame
+\newenvironment{cmcmsuTransitionFrame}{%
+    \setbeamercolor{background canvas}{bg=cmcmsuYellow}%
+    \begin{frame}%
+        }{%
+    \end{frame}%
+}
+
+\ifcmcmsu@sectiontransition
+    \RequirePackage{totcount}
+    \regtotcounter{section}
+    \AtBeginSection[]{%
+        \begin{cmcmsuTransitionFrame}
+            \begin{center}
+                {\Huge \textcolor{black}{[\insertsectionnumber/\textcolor{cmcmsuRed}{\total{section}}]\secname}}
+            \end{center}
+        \end{cmcmsuTransitionFrame}
+    }
+\fi
+
+% Style of environments
+
+\AtBeginEnvironment{definition}{
+    \setbeamercolor{block title}{fg=cmcmsuGreen, bg=cmcmsuGreen!20}
+    \setbeamercolor{block body}{fg=black, bg=cmcmsuGreen!10}
+    \addtobeamertemplate{block begin}{}{
+    \setbeamercolor{itemize item}{fg=cmcmsuGreen}%
+    \setbeamercolor{itemize subitem}{fg=cmcmsuGreen}%
+    \setbeamercolor{itemize subsubitem}{fg=cmcmsuGreen}%
+    \setbeamercolor{enumerate item}{fg=cmcmsuGreen}%
+    \setbeamercolor{enumerate subitem}{fg=cmcmsuGreen}%
+    \setbeamercolor{enumerate subsubitem}{fg=cmcmsuGreen}%
+  }
+}
+
+\AtBeginEnvironment{definition*}{
+    \setbeamercolor{block title}{fg=cmcmsuGreen, bg=cmcmsuGreen!20}
+    \setbeamercolor{block body}{fg=black, bg=cmcmsuGreen!10}
+    \setbeamercolor{itemize item}{fg=cmcmsuGreen}%
+    \setbeamercolor{itemize subitem}{fg=cmcmsuGreen}%
+    \setbeamercolor{itemize subsubitem}{fg=cmcmsuGreen}%
+    \setbeamercolor{enumerate item}{fg=cmcmsuGreen}%
+    \setbeamercolor{enumerate subitem}{fg=cmcmsuGreen}%
+    \setbeamercolor{enumerate subsubitem}{fg=cmcmsuGreen}%
+}
+
+\AtBeginEnvironment{theorem}{
+    \setbeamercolor{block title}{fg=cmcmsuBlue, bg=cmcmsuBlue!20}
+    \setbeamerfont{block body}{shape=\upshape}
+    \setbeamercolor{block body}{fg=black, bg=cmcmsuBlue!10}
+}
+
+\AtBeginEnvironment{theorem*}{
+    \setbeamercolor{block title}{fg=cmcmsuBlue, bg=cmcmsuBlue!20}
+    \setbeamerfont{block body}{shape=\upshape}
+    \setbeamercolor{block body}{fg=black, bg=cmcmsuBlue!10}
+}
+
+\AtBeginEnvironment{lemma}{
+    \setbeamercolor{block title}{fg=cmcmsuBlue, bg=cmcmsuBlue!20}
+    \setbeamerfont{block body}{shape=\upshape}
+    \setbeamercolor{block body}{fg=black, bg=cmcmsuBlue!10}
+}
+\AtBeginEnvironment{lemma*}{
+    \setbeamercolor{block title}{fg=cmcmsuBlue, bg=cmcmsuBlue!20}
+    \setbeamercolor{block body}{fg=black, bg=cmcmsuBlue!10}
+}
+
+\AtBeginEnvironment{corollary}{
+    \setbeamercolor{block title}{fg=cmcmsuBlue, bg=cmcmsuBlue!20}
+    \setbeamerfont{block body}{shape=\upshape}
+    \setbeamercolor{block body}{fg=black, bg=cmcmsuBlue!10}
+}
+\AtBeginEnvironment{corollary*}{
+    \setbeamercolor{block title}{fg=cmcmsuBlue, bg=cmcmsuBlue!20}
+    \setbeamerfont{block body}{shape=\upshape}
+    \setbeamercolor{block body}{fg=black, bg=cmcmsuBlue!10}
+}
+
+
+\AtBeginEnvironment{proof}{
+    \setbeamercolor{block title}{fg=structure.fg, bg=white}
+    \setbeamercolor{block body}{fg=black, bg=white}
+    \addtobeamertemplate{block begin}{}{
+    \setbeamercolor{itemize item}{fg=structure.fg}%
+    \setbeamercolor{itemize subitem}{fg=structure.fg}%
+    \setbeamercolor{itemize subsubitem}{fg=structure.fg}%
+    \setbeamercolor{enumerate item}{fg=structure.fg}%
+    \setbeamercolor{enumerate subitem}{fg=structure.fg}%
+    \setbeamercolor{enumerate subsubitem}{fg=structure.fg}%
+  }
+}
+
+
+\AtBeginEnvironment{example}{
+  \setbeamercolor{block title example}{fg=cmcmsuPurple, bg=cmcmsuPurple!20}
+    \setbeamercolor{block body example}{fg=black, bg=cmcmsuPurple!10}
+  \addtobeamertemplate{block example begin}{}{
+    \setbeamercolor{itemize item}{fg=cmcmsuPurple}%
+    \setbeamercolor{itemize subitem}{fg=cmcmsuPurple}%
+    \setbeamercolor{itemize subsubitem}{fg=cmcmsuPurple}%
+    \setbeamercolor{enumerate item}{fg=cmcmsuPurple}%
+    \setbeamercolor{enumerate subitem}{fg=cmcmsuPurple}%
+    \setbeamercolor{enumerate subsubitem}{fg=cmcmsuPurple}%
+  }
+}
+
+\AtBeginEnvironment{fact}{
+    \setbeamercolor{block title}{fg=white, bg=cmcmsuRed}
+    \setbeamercolor{block body}{fg=black, bg=cmcmsuRed!10}
+    \setbeamercolor{itemize item}{fg=cmcmsuRed}%
+    \setbeamercolor{itemize subitem}{fg=cmcmsuRed}%
+    \setbeamercolor{itemize subsubitem}{fg=cmcmsuRed}%
+    \setbeamercolor{enumerate item}{fg=cmcmsuRed}%
+    \setbeamercolor{enumerate subitem}{fg=cmcmsuRed}%
+    \setbeamercolor{enumerate subsubitem}{fg=cmcmsuRed}%
+}
