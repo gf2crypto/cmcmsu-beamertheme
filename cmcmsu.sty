@@ -52,6 +52,7 @@
 \newtranslation[to=Russian]{Example}{Пример}
 
 % Fonts
+\makeatletter
 \ifPDFTeX
     % pdfLaTeX: keep defaults
     % --- pdfLaTeX: modern defaults---
@@ -77,7 +78,8 @@
     \RequirePackage{unicode-math}
     \setsansfont{PT Sans}
     \setmathfont{texgyretermes-math.otf}
-\fi
+  \fi
+\makeatother
 
 % Custom colors
 \definecolor{cmcmsuBlue}{RGB}{3,106,150}
@@ -114,21 +116,25 @@
 \urlstyle{same}
 
 % Dash itemize markers
+\makeatletter
 \newlength{\cmcmsu@dashitemwidth}
 \setlength{\cmcmsu@dashitemwidth}{1.8ex}
+\makeatother
 
+\makeatletter
 \setbeamertemplate{itemize item}{%
     \usebeamercolor[fg]{itemize item}%
-    \makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
+\makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
 }
 \setbeamertemplate{itemize subitem}{%
     \usebeamercolor[fg]{itemize subitem}%
-    \makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
+  \makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
 }
 \setbeamertemplate{itemize subsubitem}{%
-    \usebeamercolor[fg]{itemize subsubitem}%
-    \makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
-}
+  \usebeamercolor[fg]{itemize subsubitem}%
+  \makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
+  }
+\makeatother
 
 % Styles of basic block
 \setbeamercolor{block title}{fg=cmcmsuBlue, bg=white}
@@ -157,6 +163,7 @@
 
 
 % Corner logo (optional) from images/
+\makeatletter
 \ifcmcmsu@cornerlogo
     \logo{%
       \IfFileExists{msu-cmc-logo2.png}{%
@@ -164,8 +171,10 @@
         }{}%
     }
 \fi
+\makeatother
 
 % Titlepage
+\makeatletter
 \ifcmcmsu@titlebackground
     \newcommand{\cmcmsu@titlebackground}{%
         \IfFileExists{msu-cmc-logo.png}{%
@@ -180,8 +189,10 @@
     }
 \else
     \newcommand{\cmcmsu@titlebackground}{}
-\fi
+  \fi
+\makeatother
 
+\makeatletter
 \renewcommand{\maketitle}{%
     {%
             \setbeamercolor{author}{fg=cmcmsuBlue!50!black}%
@@ -194,6 +205,7 @@
             \end{frame}
         }%
 }
+\makeatother
 
 % Transition frame
 \newenvironment{cmcmsuTransitionFrame}{%
@@ -203,6 +215,7 @@
     \end{frame}%
 }
 
+\makeatletter
 \ifcmcmsu@sectiontransition
     \RequirePackage{totcount}
     \regtotcounter{section}
@@ -214,7 +227,7 @@
         \end{cmcmsuTransitionFrame}
     }
 \fi
-
+\makeatother
 % Style of environments
 
 \AtBeginEnvironment{definition}{
