@@ -79,7 +79,9 @@
     \setsansfont{PT Sans}
     \setmonofont{PT Mono}
     \setmathfont{texgyretermes-math.otf}
-  \fi
+    \setmathfont{STIXTwoMath-Regular.otf}[range=\mathcal]
+    % \setmathfont{texgyretermes-math.otf}[range={cal, bfcal}, StylisticSet=01]
+\fi
 \makeatother
 
 % Custom colors
@@ -125,16 +127,16 @@
 \makeatletter
 \setbeamertemplate{itemize item}{%
     \usebeamercolor[fg]{itemize item}%
-\makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
+    \makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
 }
 \setbeamertemplate{itemize subitem}{%
     \usebeamercolor[fg]{itemize subitem}%
-  \makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
+    \makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
 }
 \setbeamertemplate{itemize subsubitem}{%
-  \usebeamercolor[fg]{itemize subsubitem}%
-  \makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
-  }
+    \usebeamercolor[fg]{itemize subsubitem}%
+    \makebox[\cmcmsu@dashitemwidth][l]{\raisebox{0.1ex}{\textendash}}%
+}
 \makeatother
 
 % Styles of basic block
@@ -167,8 +169,8 @@
 \makeatletter
 \ifcmcmsu@cornerlogo
     \logo{%
-      \IfFileExists{msu-cmc-logo2.png}{%
-        \raisebox{-0.4cm}{\includegraphics[height=1cm]{msu-cmc-logo2.png}}%
+        \IfFileExists{msu-cmc-logo2.png}{%
+            \raisebox{-0.4cm}{\includegraphics[height=1cm]{msu-cmc-logo2.png}}%
         }{}%
     }
 \fi
@@ -190,7 +192,7 @@
     }
 \else
     \newcommand{\cmcmsu@titlebackground}{}
-  \fi
+\fi
 \makeatother
 
 \makeatletter
@@ -235,13 +237,13 @@
     \setbeamercolor{block title}{fg=cmcmsuGreen, bg=cmcmsuGreen!20}
     \setbeamercolor{block body}{fg=black, bg=cmcmsuGreen!10}
     \addtobeamertemplate{block begin}{}{
-    \setbeamercolor{itemize item}{fg=cmcmsuGreen}%
-    \setbeamercolor{itemize subitem}{fg=cmcmsuGreen}%
-    \setbeamercolor{itemize subsubitem}{fg=cmcmsuGreen}%
-    \setbeamercolor{enumerate item}{fg=cmcmsuGreen}%
-    \setbeamercolor{enumerate subitem}{fg=cmcmsuGreen}%
-    \setbeamercolor{enumerate subsubitem}{fg=cmcmsuGreen}%
-  }
+        \setbeamercolor{itemize item}{fg=cmcmsuGreen}%
+        \setbeamercolor{itemize subitem}{fg=cmcmsuGreen}%
+        \setbeamercolor{itemize subsubitem}{fg=cmcmsuGreen}%
+        \setbeamercolor{enumerate item}{fg=cmcmsuGreen}%
+        \setbeamercolor{enumerate subitem}{fg=cmcmsuGreen}%
+        \setbeamercolor{enumerate subsubitem}{fg=cmcmsuGreen}%
+    }
 }
 
 \AtBeginEnvironment{definition*}{
@@ -293,27 +295,27 @@
     \setbeamercolor{block title}{fg=structure.fg, bg=white}
     \setbeamercolor{block body}{fg=black, bg=white}
     \addtobeamertemplate{block begin}{}{
-    \setbeamercolor{itemize item}{fg=structure.fg}%
-    \setbeamercolor{itemize subitem}{fg=structure.fg}%
-    \setbeamercolor{itemize subsubitem}{fg=structure.fg}%
-    \setbeamercolor{enumerate item}{fg=structure.fg}%
-    \setbeamercolor{enumerate subitem}{fg=structure.fg}%
-    \setbeamercolor{enumerate subsubitem}{fg=structure.fg}%
-  }
+        \setbeamercolor{itemize item}{fg=structure.fg}%
+        \setbeamercolor{itemize subitem}{fg=structure.fg}%
+        \setbeamercolor{itemize subsubitem}{fg=structure.fg}%
+        \setbeamercolor{enumerate item}{fg=structure.fg}%
+        \setbeamercolor{enumerate subitem}{fg=structure.fg}%
+        \setbeamercolor{enumerate subsubitem}{fg=structure.fg}%
+    }
 }
 
 
 \AtBeginEnvironment{example}{
-  \setbeamercolor{block title example}{fg=cmcmsuPurple, bg=cmcmsuPurple!20}
+    \setbeamercolor{block title example}{fg=cmcmsuPurple, bg=cmcmsuPurple!20}
     \setbeamercolor{block body example}{fg=black, bg=cmcmsuPurple!10}
-  \addtobeamertemplate{block example begin}{}{
-    \setbeamercolor{itemize item}{fg=cmcmsuPurple}%
-    \setbeamercolor{itemize subitem}{fg=cmcmsuPurple}%
-    \setbeamercolor{itemize subsubitem}{fg=cmcmsuPurple}%
-    \setbeamercolor{enumerate item}{fg=cmcmsuPurple}%
-    \setbeamercolor{enumerate subitem}{fg=cmcmsuPurple}%
-    \setbeamercolor{enumerate subsubitem}{fg=cmcmsuPurple}%
-  }
+    \addtobeamertemplate{block example begin}{}{
+        \setbeamercolor{itemize item}{fg=cmcmsuPurple}%
+        \setbeamercolor{itemize subitem}{fg=cmcmsuPurple}%
+        \setbeamercolor{itemize subsubitem}{fg=cmcmsuPurple}%
+        \setbeamercolor{enumerate item}{fg=cmcmsuPurple}%
+        \setbeamercolor{enumerate subitem}{fg=cmcmsuPurple}%
+        \setbeamercolor{enumerate subsubitem}{fg=cmcmsuPurple}%
+    }
 }
 
 \AtBeginEnvironment{fact}{
