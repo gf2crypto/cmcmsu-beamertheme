@@ -74,15 +74,18 @@
         }%
     }%
 \else
+    \usefonttheme{professionalfonts}
     \RequirePackage{fontspec}
     \RequirePackage{unicode-math}
-    \setsansfont{PT Sans}
+    \setsansfont{PT Sans}[SmallCapsFont = {PT Serif}]
     \setmonofont{PT Mono}
     \setmathfont{texgyretermes-math.otf}
     \setmathfont{STIXTwoMath-Regular.otf}[range=\mathcal]
     % \setmathfont{texgyretermes-math.otf}[range={cal, bfcal}, StylisticSet=01]
 \fi
 \makeatother
+
+\RequirePackage{microtype}
 
 % Custom colors
 \definecolor{cmcmsuBlue}{RGB}{3,106,150}
