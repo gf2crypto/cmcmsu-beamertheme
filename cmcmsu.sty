@@ -39,9 +39,10 @@
 % Images live inside the theme directory
 \makeatletter
 \AtEndPreamble{
-    \let\oldGinput@path\Ginput@path%
-    \graphicspath{\cmcmsu@imagesdir}
-    \g@addto@macro\Ginput@path{\oldGinput@path}
+    \edef\Ginput@path{\cmcmsu@imagesdir\Ginput@path}
+    % \let\oldGinput@path\Ginput@path%
+    % \graphicspath{\cmcmsu@imagesdir}
+    % \g@addto@macro\Ginput@path{\oldGinput@path}
 }
 \makeatother
 
@@ -181,9 +182,9 @@
 \ifcmcmsu@cornerlogo
     \AtBeginDocument{
         \logo{%
-            \IfFileExists{\cmcmsu@cornerlogo}{%
-                \raisebox{-0.4cm}{\includegraphics[height=1cm]{\cmcmsu@cornerlogo}}%
-            }{}%
+            % \IfFileExists{\cmcmsu@cornerlogo}{%
+            \raisebox{-0.4cm}{\includegraphics[height=1cm]{\cmcmsu@cornerlogo}}%
+            % }{\typeout{ERROR: \cmcmsu@cornerlogo not found}}%
         }
     }
 \fi
@@ -193,15 +194,15 @@
 \makeatletter
 \ifcmcmsu@titlebackground
     \newcommand{\cmcmsu@titlebackground}{%
-        \IfFileExists{msu-cmc-logo.png}{%
-            \usebackgroundtemplate{%
-                \begin{tikzpicture}[remember picture,overlay]
-                    \node[opacity=0.2, xshift=7cm,yshift=3cm] at (current page.south west) {%
-                        \includegraphics[width=1.3\textwidth, keepaspectratio]{\cmcmsu@titlelogo}%
-                    };
-                \end{tikzpicture}%
-            }%
-        }{}%
+        % \IfFileExists{msu-cmc-logo.png}{%
+        \usebackgroundtemplate{%
+            \begin{tikzpicture}[remember picture,overlay]
+                \node[opacity=0.2, xshift=7cm,yshift=3cm] at (current page.south west) {%
+                    \includegraphics[width=1.3\textwidth, keepaspectratio]{\cmcmsu@titlelogo}%
+                };
+            \end{tikzpicture}%
+        }%
+        % }{}%
     }
 \else
     \newcommand{\cmcmsu@titlebackground}{}
