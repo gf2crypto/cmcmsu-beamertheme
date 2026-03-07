@@ -1,0 +1,569 @@
+% Created 2026-03-07 Sat 17:44
+% Intended LaTeX compiler: pdflatex
+\documentclass[aspectratio=169, 12pt]{beamer}
+\usepackage{iftex}
+\ifxetex
+\fi
+\usepackage[utf8]{inputenc}
+\usepackage[T1, T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{colortbl}
+\usepackage{caption}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{xparse}
+\usepackage{xfrac}
+\graphicspath{{./images/}{./pics/}{./img/}{./pictures/}{./picture}}
+
+\makeatletter
+\AtEndPreamble{
+    \@ifpackageloaded{unicode-math}{}{%
+        \newcommand{\symbf}[1]{\ensuremath{\boldsymbol{#1}}}
+        \newcommand{\symbfit}[1]{\ensuremath{\boldsymbol{#1}}}
+        \usepackage{upgreek}
+        \newcommand{\symup}[1]{%
+            \begingroup
+            \edef\symup@name{\expandafter\@gobble\string#1}% alpha from \alpha
+            \ifcsname up\symup@name\endcsname
+                 \csname up\symup@name\endcsname
+            \else
+                 \mathrm{#1}%
+            \fi
+            \endgroup
+       } 
+       \newcommand{\symbfup}[1]{\ensuremath{\boldsymbol{\symup{#1}}}}
+    }
+}
+\makeatother
+\newcommand{\vect}[1]{\symbfup{#1}}
+\newcommand{\matr}[1]{\symbfup{#1}}
+\newcommand{\code}[1]{\mathcal{#1}}
+\newcommand{\str}[1]{\symup{#1}}
+\newcommand{\elt}[1]{\symup{#1}}
+\newcommand{\crypto}[1]{\mathsf{#1}}
+\newcommand{\algo}[1]{\mathsf{#1}}
+\newcommand{\compl}[1]{\mathsf{#1}}
+\pdfstringdefDisableCommands{\def\ell{ℓ}}
+\newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
+\usetheme{cmcmsu}
+\author{доц. Чижов Иван В.}
+\date{2 марта 2026 г.}
+\title{Постквантовые криптосистемы}
+\subtitle{Лекция 2}
+\hypersetup{
+ pdfauthor={доц. Чижов Иван В.},
+ pdftitle={Постквантовые криптосистемы},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.2 (Org mode 9.7.11)}, 
+ pdflang={Russian}}
+\begin{document}
+
+\maketitle
+\begin{frame}{\translate{Outline}}
+\tableofcontents
+\end{frame}
+
+\section{Первый раздел}
+\label{sec:orgc0256fc}
+\begin{frame}[label={sec:org5fdf876}]{Заголовок слайда}
+This is some text in the first frame. This is some text in the first
+frame. This is some text in the first frame.
+
+\emph{Курсивный шрифт}.
+
+\alert{Привлечение внимания (alert)}.
+
+\emph{\textbf{Курсивный жирный шрифт}}.
+\end{frame}
+\begin{frame}[label={sec:orgcc70f65}]{A simple slide}
+This slide consists of some text with a number of bullet points:
+
+\begin{itemize}
+\item the first, very $\backslash$@important$\backslash$@, point!
+\item the previous point shows the use of the special markup which
+translates to the Beamer specific \emph{alert} command for highlighting
+text.
+\end{itemize}
+
+
+The above list could be numbered or any other type of list and may
+include sub-lists.
+\end{frame}
+\begin{frame}[label={sec:org1b8cba9}]{A more complex slide}
+This slide illustrates the use of Beamer blocks.  The following text,
+with its own headline, is displayed in a block:
+\begin{theorem}[Org mode increases productivity]\label{sec:org6bc93c5}
+\begin{itemize}
+\item org mode means not having to remember \LaTeX{} commands.
+\item it is based on ascii text which is inherently portable.
+\item Emacs!
+\end{itemize}
+
+\hfill \(\qed\)
+\end{theorem}
+\end{frame}
+\begin{frame}[label={sec:org0f83ba0}]{Тестируем оверлеи}
+\onslide*<1>{
+Этот текст только на слайде 1.
+}
+
+This is a text in second frame.  For the sake of showing an example.
+
+\begin{itemize}[<+->]
+\item Text visible on slide 1
+\item Text visible on slide 2
+\item Text visible on slide 3
+\item Text visible on slide 4
+\end{itemize}
+\end{frame}
+\begin{frame}[label={sec:orgc1bad94}]{Прямоугольные треугольники}
+\onslide*<1>{
+\begin{definition}\label{def:triangle}
+\emph{Прямоугольным треугольником} называется треугольник, у которого один
+угол равен \(90\) градусов.
+\end{definition}
+}
+
+\begin{theorem}
+<2->
+Сумма квадратов катетов равна квадрату гипотенузы, т.е.
+\begin{equation}
+\label{eq:thm-pif}
+a^2 + b^2 = c^2
+\end{equation}
+\end{theorem}
+
+\only<3>{
+\begin{proof}
+Доказательство очень простое!
+\end{proof}
+}
+\begin{alertblock}<4->{Замечание}
+Множество решений уравнения \eqref{eq:thm-pif} называется пифагоровыми тройками.
+Обозначим их символом \(\mathcal{C}\) (каллиграфическое \(C\)).
+Очевидно, что \(\mathcal{C}\subseteq \mathbb{R}^{3}\).
+
+А это множество \(\mathcal{B}\) (Каллиграфическое \(B\)).
+\end{alertblock}
+\end{frame}
+\begin{frame}[label={sec:orgd765e86}]{Two-column slide}
+\begin{columns}
+\begin{column}[t]{0.5\columnwidth}
+This is a text in first column.
+\[
+  E=mc^{2}.
+\]
+
+\begin{itemize}
+\item First item
+\item Second item
+\end{itemize}
+\end{column}
+\begin{column}[t]{0.5\columnwidth}
+This text will be in the second column and on a second thoughts,
+ this is a nice looking layout in some cases.
+\end{column}
+\end{columns}
+\end{frame}
+\begin{frame}[label={sec:org51ed6ae}]{Окружения без нумерации}
+\begin{block}{Утверждение}
+Небольшое утверждение, которое ничего не постулирует, а просто
+показывается различные формулы, например, \(2^{x}\) или \(f(x)=x^{2}+ax+ b\).
+
+Также вот ещё одна формула
+\[
+\int\frac{e^{x}}{x^{2}}dx=Ei(x)-\frac{e^{x}}{x}+C.
+\]
+Конец утверждения.
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org2ee2d7e}]{Окружения без нумерации II}
+\begin{block}{Лемма}
+Небольшая лемма, которая демонстрирует начертание разных математических элементов.
+
+Это векторы: \(\vect{a}, \vect{\alpha}, \vect{x}\)
+
+А это матрицы: \(\matr{A}, \matr{\Gamma}, \matr{X}\)
+
+Это элементы групп: \(\elt{\sigma}, \elt{a}, \elt{x}\)
+
+Это алгебраические структуры (в основном группы): \(\str{S}_{n}, \str{GL}_{k}(q), \mathbb{F}_{q}\)
+
+Это поля и кольца: \(\mathbb{Z}, \mathbb{F}, \mathbb{N}, \mathbb{RR}, \mathbb{C}\)
+
+Это коды, линейные пространства: \(\mathcal{C}, \mathcal{A}, \mathcal{K}, \mathcal{M}\)
+
+Это алгоритмы: \(\algo{Dec}, \algo{Enc}, \algo{KGen}, \algo{pk}\)
+
+Это классы сложности: \(\compl{P}, \compl{NP}\)
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:org479bed0}]{Окружения без нумерации III и оверлеи}
+\begin{alertblock}<1>{Очень важное утверждение}
+Это утверждение не имеет номера и содержит немного текста.
+\end{alertblock}
+\begin{exampleblock}<1-2>{Определение (простое)}\label{sec:org9514d46}
+\alert{Прямоугольным треугольником} называется треугольник, у которого есть угол равный \(90\) градусам.
+\end{exampleblock}
+\begin{example}<3>[]\label{sec:org94201a7}
+Примером прямоугольного треугольника является равнобедренный треугольник с углами при основании \(\sfrac{\pi}{4}\).
+\end{example}
+\end{frame}
+\begin{frame}[label={sec:org776a60c}]{Вставка картинок}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\begin{center}
+\includegraphics[width=.9\linewidth]{./images/cmc-msu.jpg}
+\end{center}
+\end{column}
+\begin{column}{0.5\columnwidth}
+\begin{itemize}[<+->]
+\item Картинка с главным зданием МГУ и корпусов факультета
+вычислительной математики и кибернетики.
+\item Очень красивые здания.
+\item Приезжайте на Воробьевы горы, чтобы их увидеть лично.
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+\begin{frame}[label={sec:orge317955}]{Раскраска формул.}
+\begin{theorem}
+Сумма квадратов катетов равна квадрату гипотенузы, т.е.
+\begin{equation}
+\label{eq:thm-pif}
+\only<2>{\color{red}}
+a
+\only<2>{\normalcolor}^2
++
+\only<3>{\color{red}}
+b
+\only<3>{\normalcolor}^2
+=
+\only<4>{\color{red}}
+c
+\only<4>{\normalcolor}^2
+\end{equation}
+
+\only<2>{\textcolor{red}{Первый катет}}
+
+\only<3>{\textcolor{red}{Второй катет}}
+
+\only<4>{\textcolor{red}{Гипотенуза}}
+\end{theorem}
+\end{frame}
+\section{Что такое постквантовая криптография}
+\label{sec:orgbb109c6}
+\begin{frame}[label={sec:orge975f3b}]{Квантовые алгоритмы}
+\begin{itemize}[<+->]
+\item Алгоритм Шора (целочисленной факторизации и дискретного логарифмирования в коммутативной конечной группе)
+\item Алгоритм Гровера (поиска элемента в неупорядоченном массиве)
+\end{itemize}
+\end{frame}
+\begin{frame}[label={sec:org9c1d5f5},fragile]{Классификация криптографических механизмов}
+ Используем окружение \texttt{block}.
+\begin{block}<+->{По назначению (обычный \texttt{block})}
+\begin{itemize}[<+->]
+\item Шифрование: решает задачу обеспечения секретности сообщения
+\item Аутентификация/подпись: решает задачу обеспечения целостности сообщения
+\begin{itemize}
+\item Нужно убедиться в авторстве источника сообщений
+\item Нужно убедиться, что сообщение при передаче не изменилось
+\end{itemize}
+\end{itemize}
+\end{block}
+\begin{alertblock}<+->{По типу (\texttt{alertblock})}
+\begin{itemize}[<+->]
+\item С секретным ключом (один и тот же ключ у отправителя и получателя)
+\item С открытым ключом (у отправителя и получателя \alert{разные} ключи)
+\end{itemize}
+\end{alertblock}
+\end{frame}
+\begin{frame}[label={sec:org39ff659},fragile]{Что будет после появления многокубитного квантового компьютера}
+ \begin{exampleblock}<+->{Влияние квантовых алгоритмов (\texttt{exampleblock})}\label{sec:orga9ccb4f}
+\begin{itemize}[<+->]
+\item Схемы с секретным ключом~--- увеличение длины ключа в 2 раза
+\item \alert{Схемы с открытым ключом}~--- полностью не стойкие.
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+\begin{frame}[label={sec:org8632b95}]{Постквантовые задачи (нумерованный список)}
+\begin{enumerate}[<+->]
+\item Задача решения системы нелинейных (квадратных) уравнения над конечным полем (например, над \(\mathbb{F}_{2}=\left\{0,1\right\}\)). Примеры: Oil and Vinegar, RAINBOW
+\item Задача декодирования линейного кода. Примеры: Classic McEliece, PALOMA, HQC-KEM (FIPS-207)
+\item Задача декодирования целочисленной решетки. Примеры: ML-DSA (Crystal Dilithium, FIPS-204), FN-DSA (Falcon, FIPS-206), ML-KEM (Crystal Kyber, FIPS-203)
+\item Задача построения коллизии для хеш-функции. Примеры: SLH-DSA (SPHINCS+, FIPS-205).
+\item Задача поиска изогении эллиптической кривой. Пример: SIDH.
+\end{enumerate}
+\end{frame}
+\section{Понятие криптосистемы с открытым ключом}
+\label{sec:org4b022cb}
+\begin{frame}[label={sec:orgdbebe2c}]{Когда появилась криптография на кодах (тестируем картинки)}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\begin{figure}[htbp]
+\centering
+\includegraphics[height=0.5\textheight]{/Users/surehand/git-projects/org-notes/images/McEliece_2017_retirement_cropped_8250-2.max-1400x800.jpg}
+\caption{Роберт Мак-Элис (1942--2019), проф. Калифорнийского института технологий (Caltech)}
+\end{figure}
+\end{column}
+\begin{column}{0.5\columnwidth}
+\begin{itemize}
+\item Криптосистема Мак-Элиса (1978 г., Р.~Мак-Элис)
+\end{itemize}
+
+\vfill
+\end{column}
+\end{columns}
+\end{frame}
+\begin{frame}[label={sec:org44d74b0}]{Что будем рассматривать далее (много картинок)}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\begin{minipage}{0.49\textwidth}
+\begin{center}
+\includegraphics[height=.4\textheight]{/Users/surehand/git-projects/org-notes/images/McEliece_2017_retirement_cropped_8250-2.max-1400x800.jpg}
+\end{center}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+\begin{center}
+\includegraphics[height=.4\textheight]{/Users/surehand/git-projects/org-notes/images/niederreiter.jpeg}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\begin{center}
+\includegraphics[height=.4\textheight]{/Users/surehand/git-projects/org-notes/images/alekhnovich.jpg}
+\end{center}
+\end{minipage}
+\end{column}
+\begin{column}{0.5\columnwidth}
+\begin{itemize}
+\item \alert{Криптосистема Мак-Элиса} (1978 г., Р.~Мак-Элис)
+\item \alert{Криптосистема Нидеррайтера} (1986 г., Г.~Нидеррайтер).
+\item Криптосистема Алехновича (2003 г., М.~Алехнович)
+\end{itemize}
+
+\vfill
+\end{column}
+\end{columns}
+\end{frame}
+\begin{frame}[label={sec:org310a8c3}]{Криптосистема с открытым ключом \(\Pi=(\algo{KGen}, \algo{Enc}, \algo{Dec})\)}
+\begin{definition}[]\label{sec:orga844a3b}
+Криптосистемой с открытым ключом называется тройка алгоритмов \(\Pi=(\algo{KGen}, \algo{Enc}, \algo{Dec})\)
+\end{definition}
+\begin{definition}[Алгоритм генерации ключей \(\algo{KGen}\)]\label{sec:org5c90c99}
+\begin{itemize}[<+->]
+\item Полиномиальный вероятностный алгоритм (п.в.а.)
+\item \((\mathsf{sk}, \mathsf{pk}) \gets \algo{KGen}(1^n).\)
+\item \(n\in\mathbb{N}\)~--- параметр безопасности;
+\item \(\algo{sk }\in \{0,1\}^{\star}\)~--- \alert{секретный ключ} или ключ расшифрования;
+\item \(\algo{pk}\in \{0,1\}^{\star }\)~--- \alert{открытый ключ} или ключ шифрования.
+\end{itemize}
+\end{definition}
+\end{frame}
+\begin{frame}[label={sec:org6680ddc}]{Криптосистема с открытым ключом \(\Pi=(\algo{KGen}, \algo{Enc}, \algo{Dec})\)}
+\begin{columns}[t]
+\begin{column}{0.5\columnwidth}
+\begin{definition}<+->[Шифрование \(\algo{Enc}\)]\label{sec:org6bb89cf}
+\begin{itemize}[<+->]
+\item п.в.а.
+\item \(c\gets \algo{Enc}(pk,m)=\algo{Enc}_{\algo{pk}}(m)\)
+\item \(\algo{pk}\)~--- открытый ключ (второй выход алгоритма \(\algo{KGen}\));
+\item \(m\in\mathcal{M}\subseteq \{0,1\}^{\star}\)~--- \alert{секретное  сообщение};
+\item \(c\in \{0,1\}^{\star}\)~--- \alert{шифр-текст} сообщения \(m\) на ключе \(\algo{pk}\).
+\end{itemize}
+\end{definition}
+\end{column}
+\begin{column}[t]{0.5\columnwidth}
+\begin{definition}<+->[Расшифрования \(\algo{Dec}\)]\label{sec:orgc752953}
+\begin{itemize}[<+->]
+\item полиномиальный детерминированный алгоритм (п.д.а.)
+\item \(m \gets \algo{Dec}(\algo{sk},c)=\algo{Dec}_{\algo{sk}}(c)\)
+\item \(\algo{sk}\)~--- секретный ключ (первый выход алгоритма \(\algo{KGen}\));
+\item \(c\in \{0,1\}^{\star}\)~--- \alert{шифр-текст}
+\item \(m\in\mathcal{M}\subseteq \{0,1\}^{\star}\)~--- \alert{секретное сообщение}.
+\end{itemize}
+\end{definition}
+\end{column}
+\end{columns}
+\end{frame}
+\section{Линейные коды, исправляющие ошибки}
+\label{sec:org10927e2}
+\begin{frame}[label={sec:orge37f0ad}]{Линейные коды}
+\begin{itemize}[<+->]
+\item \(\mathbb{F}_{2}=\{0,1\}\)~--- поле из двух элементов
+\item \(\mathbb{F}_{2}^n\)~--- линейное пространство векторов длины \(n\) над полем \(\mathbb{F}_{2}\).
+\item \alert{Линейный блоковый \([n]\)-код} \(\code{C}\)~---
+произвольное линейное подпространство \(\mathbb{F}_{2}^n\).
+\item \alert{\([n,k]\)-код}~--- линейное подпространство размерности \(k\) пространства \(\mathbb{F}_{2}^n\).
+\item \(\vect{c}\in\code{C}\)~--- слово (кодовое слово);
+\item \(n\)~--- длина кода, \(k\)~--- размерность кода;
+\item \(R=\frac{k}{n}\)~--- скорость передачи, \(r=n-k\)~--- избыточность;
+\item \(|\code{C}|=2^k\)~--- мощность кода (число слов).
+\item \alert{Порождающая матрица} \([n,k]\)-кода \(\code{C}\)~---
+\((k\times n)\)-матрица, строками которой являются базисные векторы \(\code{C}\).
+\end{itemize}
+\end{frame}
+\begin{frame}[label={sec:org9f5a9c4}]{Линейный блоковый код}
+\begin{itemize}[<+->]
+\item \(\mathbb{F}_{2}=\{0,1\}\)~--- поле из двух элементов
+\item \(\mathbb{F}_{2}^n\)~--- линейное пространство векторов длины \(n\) над полем \(\mathbb{F}_{2}\).
+\begin{itemize}
+\item \(\mathbb{F}_{2}^3\):
+\[ (000), (001), (010), (011), (100), (101), (110), (111). \]
+\item \(\vect{v}_1,\vect{v}_2\in \mathbb{F}_{2}^n \Rightarrow \vect{v}_1+\vect{v}_2\in \mathbb{F}_{2}^n\).
+\end{itemize}
+\item \alert{Линейный блоковый \([n]\)-код} \(\code{C}\)~---
+произвольное линейное подпространство \(\mathbb{F}_{2}^n\).
+\begin{itemize}
+\item \(\mathbb{F}_{2}^3\), \([3]\)
+\[ \code{C}=\{(000), (110), (011), (101)\} \subseteq \mathbb{F}_{2}^3\]
+\item \(\vect{c}_1,\vect{c}_2\in\code{C}\Rightarrow \vect{c}_1+\vect{c}_2\in\code{C}\).
+\end{itemize}
+\item \(n\)~--- длина \([n]\)-кода \(\code{C}\).
+\item \(\code{C}\)~--- подпространство \(\mathbb{F}_{2}^n\) \(\Rightarrow\) \(\dim\code{C}\)~--- \alert{размерность} кода \(\code{C}\).
+\item \alert{\([n,k]\)-код}~--- линейное подпространство размерности \(k\) пространства \(\mathbb{F}_{2}^n\).
+\begin{itemize}
+\item \(\code{C}=\{(000), (110), (011), (101)\} \subseteq
+    \mathbb{F}_{2}^3\)~--- \([3,2]\)-код.
+\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}[label={sec:org8b3afab}]{Линейный код как подпространство}
+\begin{definition}<+->[Порождающая матрица]\label{sec:org06a2505}
+Матрица \(\matr{G}\), строками которой являются базисные векторы кода \(\code{C}\).
+
+Если \(\code{C}\)~--- \([n,k]\)~--- код, то его
+порождающая матрица \(\matr{G}\) имеет размер \(k\times n\).
+\end{definition}
+\begin{example}<+->[Пример]\label{sec:org77c3c13}
+Для \([3,2]\)-кода \(\code{C}\)
+\[ \{(000), (110), (011), (101)\} \]
+порождающей матрицей будет матрица
+
+\begin{equation*}
+\matr{G}=
+\begin{pmatrix}
+1&0&1\\
+0&1&1\\
+\end{pmatrix}
+\end{equation*}
+\end{example}
+\end{frame}
+\begin{frame}[label={sec:orge44926c}]{Порождающая матрица}
+\begin{alertblock}{Замечание}
+Любой \([n,k]\)-код \(\code{C}\) совпадает с линейной оболочкой
+строк своей порождающей матрицы \(\matr{G}\), т.е.
+\[
+  \code{C}=\left\{\vect{a}\cdot \matr{G}\ \middle\vert\ \vect{a}\in \mathbb{F}_{2}^{k}\right\}.
+\]
+\end{alertblock}
+\begin{exampleblock}<+->{Пример}\label{sec:org7fe3241}
+Матрица
+\begin{equation*}
+\begin{pmatrix}
+1&1&1&1&1&1&1&1\\
+0&0&0&0&1&1&1&1\\
+0&0&1&1&0&0&1&1\\
+0&1&0&1&0&1&0&1\\
+\end{pmatrix}
+\end{equation*}
+порождает \([8,4]\)-код из \(16\) кодовых слов (код \(\code{C}[RM](1,3)\)).
+\end{exampleblock}
+\end{frame}
+\begin{frame}[label={sec:org0d1232a}]{Задача поиска слова заданного веса}
+\begin{definition}
+\alert{Задачей поиска кодового слова заданного веса} \(\algo{sWS}(\matr{H} , t)\) называется следующая задача.
+
+\begin{itemize}[<+->]
+\item \alert{Вход}:
+\begin{itemize}
+\item \(\matr{H}\)~--- \((r\times n)\)~--- матрица
+\item \(t\in\mathbb{N}\)
+\end{itemize}
+\item \alert{Найти}: \(\vect{x}\in\mathbb{F}_{2}^n\), \(\operatorname{wt}\left(\vect{x}\right)=t\) и \(\matr{H} \cdot \vect{x}^{\top}=0.\)
+\end{itemize}
+\end{definition}
+\end{frame}
+\begin{frame}[label={sec:org9d5faa2}]{Задачи распознавания}
+\begin{columns}
+\begin{column}[t]{0.5\columnwidth}
+\begin{definition}<+->[Синдромное декодирование]\label{sec:org62e2997}
+\alert{Задача синдромного декодирования} \(\mathrm{SD}(\matr{H} , \vect{s}, t)\):
+\begin{itemize}[<+->]
+\item \alert{Вход}:
+\begin{itemize}
+\item \(\matr{H}\)~--- \((r\times n)\)~--- матрица
+\item \(\vect{s}\in\mathbb{F}_{2}^r\)
+\item \(t\in\mathbb{N}\)
+\end{itemize}
+\item \alert{Вопрос}: существует ли вектор \(\vect{e}\in\mathbb{F}_{2}^n\), что \(\operatorname{wt}{\vect{e}}=t\) и \(\matr{H} \cdot \vect{e}^{\top}=\vect{s}^{\top}.\)
+\end{itemize}
+\end{definition}
+\end{column}
+\begin{column}[t]{0.5\columnwidth}
+\begin{definition}<+->[О спектре весов]\label{sec:org7d44ecd}
+\alert{Задача о спектре весов} \(\mathrm{WS}(\matr{H} , t)\):
+\begin{itemize}[<+->]
+\item \alert{Вход}:
+\begin{itemize}
+\item \(\matr{H}\)~--- \((r\times n)\)~--- матрица
+\item \(t\in\mathbb{N}\)
+\end{itemize}
+\item \alert{Вопрос}: существует ли такой вектор \(\vect{x}\in\mathbb{F}_{2}^n\), что \(\operatorname{wt}{\vect{x}}=t\) и \(\matr{H} \cdot \vect{x}^{\top}=0.\)
+\end{itemize}
+\end{definition}
+\end{column}
+\end{columns}
+\end{frame}
+\begin{frame}[label={sec:orgdcd3808}]{Насколько сложны задачи синдромного декодирования?}
+\begin{lemma}
+Это лемма
+\end{lemma}
+\begin{theorem}[Теорема об NP-полноте]\label{sec:org0ccc9c5}
+Задача синдромного декодирования (распознавательная) \(\algo{SD}(\matr{H} ,\vect{s},t)\)
+является \(\compl{NP}\)-полной.
+
+\begin{itemize}
+\item Первое
+\item Второе
+\end{itemize}
+\end{theorem}
+\begin{corollary}
+Криптосистема Мак-Элиса является стойкой и надежной.
+\end{corollary}
+\end{frame}
+\begin{frame}[label={sec:orgc4e7650}]{Схема доказательства}
+\begin{proof}
+\begin{itemize}[<+->]
+\item Делай раз
+\item Делай два
+\item Делай три
+\item Доказательство завершено \(\qedhere\)
+\end{itemize}
+\end{proof}
+\end{frame}
+\begin{frame}[label={sec:org5b627ce},fragile]{Как лучше оформлять леммы, утверждения и следствия}
+ \begin{beamercolorbox}{}
+Лучше использовать обычное окружение \texttt{block}.
+\end{beamercolorbox}
+\begin{block}{Лемма}
+Пусть \(\mathbb{F}\)~--- произвольное поле.
+Тогда для любых элементов \(a,b\in \mathbb{F}\) справедливо равенство \((a+b)^2=a^2+2ab+b^2\).
+\end{block}
+\begin{block}{Утверждение}
+В поле \(\mathbb{F}_{2^{\ell}}\) характеристики \(2\) для любых элементов \(a\in \mathbb{F}_2^{\ell}\) и \(b\in \mathbb{F}_{2^{\ell}}\) верно равенство \((a+b)^2=a^2+b^2\).
+\end{block}
+\end{frame}
+\end{document}
