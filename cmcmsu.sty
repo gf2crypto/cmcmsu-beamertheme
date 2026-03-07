@@ -30,12 +30,22 @@
 \RequirePackage{caption}
 \RequirePackage{translator}
 
-% Images live inside the theme directory
 \makeatletter
-\g@addto@macro\Ginput@path{{cmcmsu-beamertheme/images/}}
+\def\cmcmsu@imagesdir{{images/}{cmcmsu-beamertheme/images/}}
+\def\cmcmsu@titlelogo{msu-cmc-logo.png}
+\def\cmcmsu@cornerlogo{msu-cmc-logo2.png}
 \makeatother
 
-% Translator defaults (as in your preamble)
+% Images live inside the theme directory
+\makeatletter
+\AtEndPreamble{
+    \let\oldGinput@path\Ginput@path%
+    \graphicspath{\cmcmsu@imagesdir}
+    \g@addto@macro\Ginput@path{\oldGinput@path}
+}
+\makeatother
+
+% Translator defaults
 \uselanguage{Russian}
 \languagepath{Russian}
 
@@ -166,14 +176,15 @@
     \setbeamercolor{enumerate subsubitem}{fg=cmcmsuGreen}%
 }{}
 
-
-% Corner logo (optional) from images/
+% Corner logo (optional)
 \makeatletter
 \ifcmcmsu@cornerlogo
-    \logo{%
-        \IfFileExists{msu-cmc-logo2.png}{%
-            \raisebox{-0.4cm}{\includegraphics[height=1cm]{msu-cmc-logo2.png}}%
-        }{}%
+    \AtBeginDocument{
+        \logo{%
+            \IfFileExists{\cmcmsu@cornerlogo}{%
+                \raisebox{-0.4cm}{\includegraphics[height=1cm]{\cmcmsu@cornerlogo}}%
+            }{}%
+        }
     }
 \fi
 \makeatother
@@ -186,7 +197,7 @@
             \usebackgroundtemplate{%
                 \begin{tikzpicture}[remember picture,overlay]
                     \node[opacity=0.2, xshift=7cm,yshift=3cm] at (current page.south west) {%
-                        \includegraphics[width=1.3\textwidth, keepaspectratio]{msu-cmc-logo.png}%
+                        \includegraphics[width=1.3\textwidth, keepaspectratio]{\cmcmsu@titlelogo}%
                     };
                 \end{tikzpicture}%
             }%
