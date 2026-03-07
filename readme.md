@@ -1,44 +1,113 @@
 # cmcmsu — Beamer Theme for CMC MSU
 
-Modern **LaTeX Beamer theme** designed for mathematical and theoretical presentations
-(coding theory, cryptography, discrete mathematics, theoretical computer science).
+**cmcmsu** is a modern **LaTeX Beamer theme** designed for mathematical and theoretical presentations:
 
-The theme provides:
+- coding theory
+- cryptography
+- discrete mathematics
+- theoretical computer science
 
-- clean minimalistic theorem environments,
-- consistent appearance across **XeLaTeX / LuaLaTeX / pdfLaTeX**,
-- PT Sans typography,
-- lightweight visual design suitable for dense mathematical slides,
-- self-contained installation (no TEXMF setup required).
+The theme focuses on **readability of dense mathematical slides** and a **minimal visual style** suitable for research talks.
 
 ---
 
-## Features
+# Overview
 
-### Typography
+Main features:
 
-#### XeLaTeX / LuaLaTeX
+- minimalistic theorem environments
+- consistent appearance across **XeLaTeX / LuaLaTeX / pdfLaTeX**
+- **PT Sans** typography
+- lightweight layout optimized for mathematical content
+- **self-contained installation** (no TEXMF configuration required)
+
+---
+
+# Screenshots
+
+### Title slide
+
+![title](screenshots/title.png)
+
+### Theorem slide
+
+![theorem](screenshots/theorems.png)
+
+### Section transition
+
+![section](screenshots/section.png)
+
+---
+
+# Minimal Example
+
+```latex
+\documentclass[aspectratio=169, 12pt]{beamer}
+\usetheme{cmcmsu}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1, T2A]{fontenc}
+\usepackage[russian]{babel}
+
+\title{Название}
+\subtitle{Подназвание}
+\author{Автор}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{Линейные коды}
+
+\begin{definition}
+Линейным кодом называется подпространство
+\[ C \subseteq \mathbb{F}_2^n . \]
+Размерность кода обозначается через \( k = \dim \mathcal{C}\).
+\end{definition}
+
+\pause
+
+\begin{theorem}
+
+Пусть \(C\)~--- линейный \([n,k]\)-код над \(\mathbb{F}_2\).
+Тогда
+\[ |C| = 2^k . \]
+
+\end{theorem}
+
+\end{frame}
+
+\end{document}
+```
+
+---
+
+# Typography
+
+The theme supports all major LaTeX engines and keeps a consistent visual appearance.
+
+## XeLaTeX / LuaLaTeX
+
 - Text font: **PT Sans**
-- Math font: **TeX Gyre Termes Math** (`texgyretermes-math.otf`)
+- Math font: **TeX Gyre Termes Math**
 - Unicode-native workflow
 
-#### pdfLaTeX (default)
-- Text: **Paratype (PT Sans family)**
-- Math: **newtxmath**
-- Full Cyrillic support (configured by the document)
+## pdfLaTeX
 
-The visual appearance is intentionally close between engines.
+- Text font: **Paratype (PT Sans family)**
+- Math font: **newtxmath**
+- full **Cyrillic support**
 
 ---
 
-## Block Design
+# Theorem and Block Design
 
-The theme uses a modern minimal style:
+The theme implements a minimal theorem layout:
 
-- colored vertical bar on the left,
-- no background fill,
-- colored theorem title,
-- body text follows immediately below.
+- colored **vertical bar**
+- **no background fill**
+- colored theorem title
+- body text follows immediately
 
 Supported theorem environments:
 
@@ -46,156 +115,170 @@ Supported theorem environments:
 - `proposition`
 - `theorem`
 
-Beamer blocks are mapped automatically:
+Standard Beamer blocks are mapped automatically:
 
 | Beamer block | Style |
-|--------------|------|
+|---|---|
 | `block` | definition |
 | `alertblock` | theorem |
 | `exampleblock` | example |
 
 ---
 
-## Repository Structure
+# Repository Structure
 
-```text
+```
 cmcmsu-beamertheme/
 │
 ├── beamerthemecmcmsu.sty
 ├── cmcmsu.sty
+├── example.tex
+├── example_xelatex.tex
+├── minimal.tex
 │
-├── sty/
-│   ├── cmcmsu-options.sty
-│   ├── cmcmsu-fonts.sty
-│   ├── cmcmsu-colors.sty
-│   ├── cmcmsu-beamer.sty
-│   ├── cmcmsu-title.sty
-│   ├── cmcmsu-sections.sty
-│   └── cmcmsu-tcb.sty
+├── screenshots/
+│   ├── title.png
+│   ├── theorem.png
+│   └── section.png
 │
 └── images/
+    ├── cmc-msu.jpg
     ├── msu-cmc-logo.png
     └── msu-cmc-logo2.png
 ```
 
-The theme automatically detects its own location — no manual path configuration is required.
+The theme automatically detects its own location, so no manual path configuration is required.
 
 ---
 
-## Installation
+# Installation
 
-### Local installation (recommended)
+## Local installation (simplest)
 
-Place the directory `cmcmsu-beamertheme/` next to your presentation:
+Download or clone the repository and place the theme files in your project directory.
 
-```text
+Example structure:
+
+```
 project/
- ├── main.tex
- └── cmcmsu-beamertheme/
+│
+├── beamerthemecmcmsu.sty
+├── cmcmsu.sty
+├── main.tex
+└── images/
 ```
 
-### Global installation
+You can also start from the provided examples:
 
-Clone or download the repository to your system.
+```
+example.tex
+example_xelatex.tex
+```
 
-#### 1. Locate your `TEXMFHOME` directory
+---
 
-Run the following command in a terminal:
+## Local installation (recommended)
 
-```bash
+Place the repository directory next to your presentation:
+
+```
+project/
+├── main.tex
+└── cmcmsu-beamertheme/
+```
+
+Then load the theme with:
+
+```latex
+\usepackage[<options>]{cmcmsu-beamertheme/cmcmsu}
+```
+
+---
+
+## Global installation (TEXMF)
+
+### 1. Locate your TEXMFHOME directory
+
+Run in terminal:
+
+```
 kpsewhich -var-value TEXMFHOME
 ```
 
-Suppose the returned directory is:
+Typical values:
 
-```bash
-~/Library/texmf
-```
-
-(This is typical for macOS; on Linux it is usually `~/texmf`.)
+- macOS: `~/Library/texmf`
+- Linux: `~/texmf`
 
 ---
 
-#### 2. Create the required directory structure
+### 2. Create directory structure
 
-Create the directory `tex/latex` inside your `TEXMFHOME`:
-
-```bash
-mkdir -p ~/Library/texmf/tex/latex
+```
+mkdir -p ~/texmf/tex/latex
 ```
 
 ---
 
-#### 3. Create a symbolic link to the theme
+### 3. Create symbolic link
 
-Create a symbolic link from the repository directory
-`<path>/cmcmsu-beamertheme` to your local TeX tree:
-
-```bash
-ln -s /ABS/PATH/TO/repo/cmcmsu-beamertheme \
-~/Library/texmf/tex/latex/cmcmsu-beamertheme
 ```
-
-Replace `/ABS/PATH/TO/repo` with the absolute path to the cloned repository.
+ln -s /ABS/PATH/TO/cmcmsu-beamertheme \
+~/texmf/tex/latex/cmcmsu-beamertheme
+```
 
 ---
 
-#### 4. Update the LaTeX filename database
+### 4. Update the filename database
 
-Run:
-
-```bash
-mktexlsr ~/Library/texmf
 ```
-
-(Alternatively, in most TeX Live installations, simply run `mktexlsr`.)
+mktexlsr
+```
 
 ---
 
-#### 5. Verify the installation
+### 5. Verify installation
 
-Check that LaTeX can find the theme:
-
-```bash
+```
 kpsewhich beamerthemecmcmsu.sty
 ```
 
-The installation is successful if the output looks like:
+Expected output:
 
-```bash
-/ABS/PATH/TO/repo/cmcmsu-beamertheme/beamerthemecmcmsu.sty
+```
+.../cmcmsu-beamertheme/beamerthemecmcmsu.sty
 ```
 
 ---
 
-## Usage
+# Usage
 
-### Recommended method
+## Standard Beamer usage
 
 ```latex
-\documentclass{beamer}
-
-\usepackage{cmcmsu-beamertheme/cmcmsu}
+\documentclass[aspectratio=169,12pt]{beamer}
+\usetheme[<options>]{cmcmsu}
 ```
 
-### Classical Beamer method
-
-If the theme is visible to TeX:
+## Local repository usage
 
 ```latex
-\usetheme{cmcmsu}
+\documentclass[aspectratio=169,12pt]{beamer}
+\usepackage[<options>]{cmcmsu-beamertheme/cmcmsu}
 ```
 
 ---
 
-## Theme Options
+# Theme Options
+
+Example:
 
 ```latex
 \usepackage[
   titlebackground=true,
   sectiontransition=true,
   cornerlogo=true
-]{cmcmsu-beamertheme/cmcmsu}
+]{cmcmsu}
 ```
 
 ### Available options
@@ -208,7 +291,7 @@ If the theme is visible to TeX:
 
 ---
 
-## pdfLaTeX Font Options
+# Font Options (pdfLaTeX)
 
 Default configuration:
 
@@ -216,48 +299,50 @@ Default configuration:
 paratype + newtxmath
 ```
 
-Customization example:
+Example customization:
 
 ```latex
 \usepackage[
   font=default,
   mathfont=cm
-]{cmcmsu-beamertheme/cmcmsu}
+]{cmcmsu}
 ```
 
-### Text options (`font`)
+### Text fonts
 
-| Value | Meaning |
+| Option | Description |
 |---|---|
 | `paratype` | PT Sans family (recommended) |
 | `default` | Computer Modern |
 
-### Math options (`mathfont`)
+### Math fonts
 
-| Value | Meaning |
+| Option | Description |
 |---|---|
 | `newtx` | Times-like math (default) |
-| `cm` | Computer Modern math |
-| `stix2` | STIX2 math |
+| `cm` | Computer Modern |
+| `stix2` | STIX2 |
 
 ---
 
-## Engine Recommendations
+# Compilation Engines
 
-Recommended compilation engines:
+Recommended:
 
-- `xelatex`
-- `lualatex`
+- **XeLaTeX**
+- **LuaLaTeX**
 
-`pdflatex` is fully supported.
+`pdfLaTeX` is fully supported.
 
 ---
 
-## Language Support
+# Language Support
 
-The theme intentionally **does not load language packages**.
+The theme **does not load language packages** intentionally.
 
-Users should configure language settings in the document preamble, for example:
+Users should configure language settings manually.
+
+Example:
 
 ```latex
 \usepackage[T2A]{fontenc}
@@ -265,41 +350,40 @@ Users should configure language settings in the document preamble, for example:
 \usepackage[russian]{babel}
 ```
 
-(or `polyglossia` for XeLaTeX/LuaLaTeX).
+For XeLaTeX/LuaLaTeX use `polyglossia`.
 
 ---
 
-## Design Philosophy
+# Design Philosophy
 
 The theme is optimized for:
 
-- mathematical talks,
-- theorem-heavy slides,
-- projection readability,
-- minimal visual noise.
+- mathematical presentations
+- theorem-heavy slides
+- projection readability
+- minimal visual noise
 
 Large colored boxes and heavy backgrounds are intentionally avoided.
 
 ---
 
-## License
+# License
 
-MIT License (recommended)
-—or specify your preferred license—
+MIT License
 
 ---
 
-## Author
+# Author
 
-Ivan Chizhov
+**Ivan Chizhov**
 CMC MSU — Information Security Department
 
 ---
 
-## Acknowledgements
+# Acknowledgements
 
-Inspired by modern Beamer themes such as:
+Inspired by modern Beamer themes:
 
 - Metropolis
 - Madrid
-- minimal academic theorem layouts
+- minimal theorem layouts
