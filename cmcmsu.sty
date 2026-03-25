@@ -9,7 +9,7 @@
 % Feature toggles
 \DeclareBoolOption[true]{titlebackground}
 \DeclareBoolOption[true]{sectiontransition}
-\DeclareBoolOption[true]{cornerlogo}
+\DeclareBoolOption[false]{cornerlogo}
 
 % --- pdfLaTeX font options ---
 % font:  paratype | default
@@ -23,12 +23,6 @@
 
 \ProcessKeyvalOptions*
 
-\ifPDFTeX%
-    \renewcommand{\cmcmsu@font}{paratype}
-\else
-    \renewcommand{\cmcmsu@font}{paratype}
-\fi
-
 % Core deps
 \RequirePackage{iftex}
 \RequirePackage{etoolbox}
@@ -41,8 +35,33 @@
 
 \makeatletter
 \def\cmcmsu@imagesdir{{images/}{cmcmsu-beamertheme/images/}}
-\def\cmcmsu@titlelogo{msu-cmc-logo.png}
-\def\cmcmsu@cornerlogo{msu-cmc-logo2.png}
+\def\cmcmsu@titlelogo{msu-cmc-logo}
+\def\cmcmsu@cornerlogo{msu-cmc-logo2}
+
+
+\newif\ifcmcmsu@graphicexists
+
+\newcommand{\cmcmsu@checkgraphicpath}[1]{%
+    \begingroup
+    \let\input@path\Ginput@path
+    \edef\Gin@extensions{\detokenize\expandafter{\Gin@extensions}}%
+    \filename@parse{#1}%
+    \let\Gin@ext\relax
+    \ifx\filename@ext\relax
+        \@for\Gin@temp:=\Gin@extensions\do{%
+            \ifx\Gin@ext\relax
+                \Gin@getbase\Gin@temp
+            \fi}%
+    \else
+        \Gin@getbase{\Gin@sepdefault\filename@ext}%
+    \fi
+    \ifx\Gin@ext\relax
+        \global\cmcmsu@graphicexistsfalse
+    \else
+        \global\cmcmsu@graphicexiststrue
+    \fi
+    \endgroup
+}
 
 
 % Images live inside the theme directory
@@ -97,7 +116,11 @@
     \RequirePackage{libertinust1math}
 }
 
-\newcommand{\cmcmsu@xetex@}{}
+\newcommand{\cmcmsu@tex@mono@}{}
+
+\newcommand{\cmcmsu@xetex@}[1]{%
+    \cmcmsu@xetex@paratype%
+}
 %% ----------------------------------------------------------------
 %%  Source Sans 3 Pro
 %%  NOTE: доступен только если установлен в LaTeX
@@ -259,7 +282,7 @@
 
 
 
-\newcommand{\cmcmsu@xetex@mathfont@}{}
+\newcommand{\cmcmsu@xetex@mathfont@}[1]{}
 %% ----------------------------------------------------------------
 %%  Latin Modern Math  (CM-style Unicode math, de-facto standard)
 %% ----------------------------------------------------------------
@@ -326,6 +349,7 @@
                 \vdots,      % U+22EE
                 \ddots,      % U+22F1
                 \setminus,   % U+2216
+                \star,       % U+22C6
             }
     ]
 }
@@ -444,7 +468,7 @@
 }
 
 %% ----------------------------------------------------------------
-\newcommand{\cmcmsu@xetex@@dejavu}[1][]{%
+\newcommand{\cmcmsu@xetex@@dejavu}[1]{%
     \typeout{Loading DeJaVu font set}%
     \cmcmsu@xetex@dejavusans{1}%
     \cmcmsu@xetex@mono@dejavumono{1}%
@@ -452,55 +476,48 @@
 }
 
 %% ----------------------------------------------------------------
-%%  ptsans  — PT Sans (main) + PT Sans Narrow (headings) + PT Mono + STIX Math
-%% ----------------------------------------------------------------
-\newcommand{\cmcmsu@xetex@ptsans}[1][]{%
-    \typeout{Loading PT Sans font set}%
-    \cmcmsu@xetex@ptsans{1}%
-    \RequirePackage{unicode-math}
-    \setmainfont[
-        BoldFont        = PTS75F.ttf,
-        ItalicFont      = PTS56F.ttf,
-        BoldItalicFont  = PTS76F.ttf
-    ]{PTS55F.ttf}%
-    \cmcmsu@xetex@mono@ptmono{MatchLowercase}%
-    \cmcmsu@xetex@mathfont@tgtermes{1}%
-}
-
-%% ----------------------------------------------------------------
 %%  alegreya  — Alegreya + Alegreya Sans + Source Code Pro + Garamond Math
 %% ----------------------------------------------------------------
-\newcommand{\cmcmsu@xetex@alegreya}{%
+\newcommand{\cmcmsu@xetex@alegreya}[1]{%
     \typeout{Loading Alegreya font set}%
     \cmcmsu@xetex@@alegreyasans{1}%
     \cmcmsu@xetex@mono@sourcecodepro{MatchLowercase}%
     \cmcmsut@xetex@mathfont@garamondmath{1}%
 }
 
-\newcommand{\cmcmsu@xetex@fira}{%
+\newcommand{\cmcmsu@xetex@fira}[1]{%
     \typeout{Loading Fira font set}%
     \cmcmsu@xetex@firasans{1}%
     \cmcmsu@xetex@mono@jetbrainsmono{MatchLowercase}%
     \cmcmsu@xetex@mathfont@firamath{1}%
 }
 
-\newcommand{\cmcmsu@xetex@paratype}{%
+\newcommand{\cmcmsu@xetex@paratype}[1]{%
     \typeout{Loading Paratype font set}%
     \cmcmsu@xetex@ptsans{1}%
     \cmcmsu@xetex@mono@jetbrainsmono{MatchLowercase}%
     \cmcmsu@xetex@mathfont@stixmath{1}%
+    \typeout{Paratype font set loaded succesfully}%
 }
 
 \newcommand{\cmcmsu@setfont}[3][1]{%
     % #1 - fontscale, #2 - series, #3 - font name
-    \ifPDTeX%
+    \typeout{Setting font: scale = '#1', series='#2', font name = '#3'}
+    \ifPDFTeX%
         \newcommand{\cmcmsu@setfont@command}{%
             \ifx\relax#2\relax
                 cmcmsu@tex@#3%
             \else
                 cmcmsu@tex@#2@#3%
             \fi
-            cmcmsu@tex@#2@#3%
+        }
+        \@ifundefined{\cmcmsu@setfont@command}{%
+            \PackageError{cmcmsu.sty}{%
+                Unknown font or font
+                set '#3' in TeX mode}{}
+        }{
+            \typeout{Run command '\cmcmsu@setfont@command'}
+            \expandafter\csname\cmcmsu@setfont@command\endcsname%
         }
     \else
         \newcommand{\cmcmsu@setfont@command}{%
@@ -510,14 +527,16 @@
                 cmcmsu@xetex@#2@#3%
             \fi
         }
+        \@ifundefined{\cmcmsu@setfont@command}{%
+            \PackageError{cmcmsu.sty}{%
+                Unknown font or font
+                set '#3' in XeTeX/LuaTeX mode}{}
+        }{
+            \typeout{Run command '\cmcmsu@setfont@command{#1}'}
+            \expandafter\csname\cmcmsu@setfont@command\endcsname{#1}%
+        }
     \fi
-    \@ifundefined{\cmcmsu@setfont@command}{%
-        \PackageError{cmcmsu.sty}{%
-            Unknown font or font
-            set '#3' in current mode}{}
-    }{
-        \expandafter\csname\cmcmsu@setfont@command\endcsname{#1}%
-    }
+    \let\cmcmsu@setfont@command\relax
 }
 
 \ifPDFTeX%
@@ -526,6 +545,7 @@
     \RequirePackage{fontspec}
 \fi
 
+\typeout{Parameters: '\cmcmsu@font'}
 \cmcmsu@setfont[\cmcmsu@fontscale]{}{\cmcmsu@font}
 \cmcmsu@setfont[\cmcmsu@mathscale]{mathfont}{\cmcmsu@mathfont}
 \cmcmsu@setfont[\cmcmsu@monoscale]{mono}{\cmcmsu@mono}
@@ -617,9 +637,12 @@
 \ifcmcmsu@cornerlogo
     \AtBeginDocument{
         \logo{%
-            % \IfFileExists{\cmcmsu@cornerlogo}{%
-            \raisebox{-0.4cm}{\includegraphics[height=1cm]{\cmcmsu@cornerlogo}}%
-            % }{\typeout{ERROR: \cmcmsu@cornerlogo not found}}%
+            \cmcmsu@checkgraphicpath{\cmcmsu@cornerlogo}
+            \ifcmcmsu@graphicexists%
+                \raisebox{-0.4cm}{%
+                    \includegraphics[height=1cm]{%
+                        \cmcmsu@cornerlogo}}
+            \fi
         }
     }
 \fi
@@ -629,15 +652,18 @@
 
 \ifcmcmsu@titlebackground
     \newcommand{\cmcmsu@titlebackground}{%
-        % \IfFileExists{msu-cmc-logo.png}{%
-        \usebackgroundtemplate{%
-            \begin{tikzpicture}[remember picture,overlay]
-                \node[opacity=0.2, xshift=7cm,yshift=3cm] at (current page.south west) {%
-                    \includegraphics[width=1.3\textwidth, keepaspectratio]{\cmcmsu@titlelogo}%
-                };
-            \end{tikzpicture}%
-        }%
-        % }{}%
+        \cmcmsu@checkgraphicpath{\cmcmsu@titlelogo}
+        \ifcmcmsu@graphicexists%
+            \usebackgroundtemplate{%
+                \begin{tikzpicture}[remember picture,overlay]
+                    \node[opacity=0.2, xshift=7cm,yshift=3cm] at (current page.south west) {%
+                        \includegraphics[%
+                            width=1.3\textwidth,
+                            keepaspectratio]{\cmcmsu@titlelogo}%
+                    };
+                \end{tikzpicture}%
+            }
+        \fi
     }
 \else
     \newcommand{\cmcmsu@titlebackground}{}
