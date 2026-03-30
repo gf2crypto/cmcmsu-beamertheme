@@ -553,6 +553,402 @@
 
 \RequirePackage{microtype}
 
+% Algorithms
+
+\newtranslation[to=Russian]{Input}{Вход}
+\newtranslation[to=Russian]{Output}{Выход}
+\newtranslation[to=Russian]{Algorithm}{Алгоритм}
+\newtranslation[to=Russian]{algorithm}{алгоритм}
+\newtranslation[to=Russian]{List of algorithms}{Список алгоритмов}
+\newtranslation[to=Russian]{Listing}{Алгоритм}
+
+\newcommand{\cmcmsu@SetListings}{
+\RequirePackage{listings}
+\RequirePackage{calc}
+\newlength{\twless}
+\newlength{\lmarg}
+\setlength{\lmarg}{\widthof{999}}
+\setlength{\twless}{\textwidth-\lmarg}
+\RequirePackage{xcolor}
+% --- Dracula Pro Alucard (light theme) ---
+\definecolor{ListingRule}{HTML}{D5D5D5}
+\definecolor{ListingNumbers}{HTML}{4F4F4F}
+\definecolor{ListingText}{HTML}{1F1F1F}
+\definecolor{ListingBackground}{HTML}{F5F5F5}
+\definecolor{ListingEmph}{HTML}{A3144D}
+\definecolor{ListingComment}{HTML}{635D97}
+\definecolor{ListingString}{HTML}{846E15}
+\definecolor{ListingBuiltin}{HTML}{A34D14}
+\definecolor{ListingType}{HTML}{644AC9}
+\definecolor{ListingConstant}{HTML}{036A96}
+\definecolor{ListingFunction}{HTML}{14710A}
+\lstdefinestyle{blackandwhite}{
+extendedchars=true,
+numbers=left,
+numberstyle=\fontsize{12pt}{14pt}\selectfont\color{ListingNumbers},
+firstnumber=1,
+stepnumber=1,
+lineskip=1pt,
+numbersep=8pt,
+backgroundcolor=\color{ListingBackground},
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+frame=leftline,
+framerule=0.8pt,
+rulecolor=\color{ListingRule},
+tabsize=2,
+captionpos=b,
+breaklines=true,
+breakatwhitespace=false,
+breakautoindent=true, postbreak=\mbox{\textcolor{ListingNumbers}{$\hookrightarrow$}\space},
+title=\lstname,
+basicstyle=\fontsize{12pt}{14pt}\selectfont\ttfamily\color{ListingText},
+keywordstyle=\color{ListingEmph},
+commentstyle=\color{ListingComment},
+stringstyle=\color{ListingString},
+escapeinside={\%*}{*)},
+morekeywords={*,...},
+inputencoding=utf8,
+xleftmargin=\lmarg,
+keepspaces=true,
+columns=fullflexible,
+upquote=true,
+texcl=true,
+literate={Ö}{{\"O}}1
+{Ä}{{\"A}}1
+{Ü}{{\"U}}1
+{ß}{{\ss}}1
+{ü}{{\"u}}1
+{ä}{{\"a}}1
+{ö}{{\"o}}1
+{~}{{\textasciitilde}}1
+{а}{{\selectfont\char224}}1
+{б}{{\selectfont\char225}}1
+{в}{{\selectfont\char226}}1
+{г}{{\selectfont\char227}}1
+{д}{{\selectfont\char228}}1
+{е}{{\selectfont\char229}}1
+{ё}{{\"e}}1
+{ж}{{\selectfont\char230}}1
+{з}{{\selectfont\char231}}1
+{и}{{\selectfont\char232}}1
+{й}{{\selectfont\char233}}1
+{к}{{\selectfont\char234}}1
+{л}{{\selectfont\char235}}1
+{м}{{\selectfont\char236}}1
+{н}{{\selectfont\char237}}1
+{о}{{\selectfont\char238}}1
+{п}{{\selectfont\char239}}1
+{р}{{\selectfont\char240}}1
+{с}{{\selectfont\char241}}1
+{т}{{\selectfont\char242}}1
+{у}{{\selectfont\char243}}1
+{ф}{{\selectfont\char244}}1
+{х}{{\selectfont\char245}}1
+{ц}{{\selectfont\char246}}1
+{ч}{{\selectfont\char247}}1
+{ш}{{\selectfont\char248}}1
+{щ}{{\selectfont\char249}}1
+{ъ}{{\selectfont\char250}}1
+{ы}{{\selectfont\char251}}1
+{ь}{{\selectfont\char252}}1
+{э}{{\selectfont\char253}}1
+{ю}{{\selectfont\char254}}1
+{я}{{\selectfont\char255}}1
+{А}{{\selectfont\char192}}1
+{Б}{{\selectfont\char193}}1
+{В}{{\selectfont\char194}}1
+{Г}{{\selectfont\char195}}1
+{Д}{{\selectfont\char196}}1
+{Е}{{\selectfont\char197}}1
+{Ё}{{\"E}}1
+{Ж}{{\selectfont\char198}}1
+{З}{{\selectfont\char199}}1
+{И}{{\selectfont\char200}}1
+{Й}{{\selectfont\char201}}1
+{К}{{\selectfont\char202}}1
+{Л}{{\selectfont\char203}}1
+{М}{{\selectfont\char204}}1
+{Н}{{\selectfont\char205}}1
+{О}{{\selectfont\char206}}1
+{П}{{\selectfont\char207}}1
+{Р}{{\selectfont\char208}}1
+{С}{{\selectfont\char209}}1
+{Т}{{\selectfont\char210}}1
+{У}{{\selectfont\char211}}1
+{Ф}{{\selectfont\char212}}1
+{Х}{{\selectfont\char213}}1
+{Ц}{{\selectfont\char214}}1
+{Ч}{{\selectfont\char215}}1
+{Ш}{{\selectfont\char216}}1
+{Щ}{{\selectfont\char217}}1
+{Ъ}{{\selectfont\char218}}1
+{Ы}{{\selectfont\char219}}1
+{Ь}{{\selectfont\char220}}1
+{Э}{{\selectfont\char221}}1
+{Ю}{{\selectfont\char222}}1
+{Я}{{\selectfont\char223}}1
+{і}{{\selectfont\char105}}1
+{ї}{{\selectfont\char168}}1
+{є}{{\selectfont\char185}}1
+{ґ}{{\selectfont\char160}}1
+{І}{{\selectfont\char73}}1
+{Ї}{{\selectfont\char136}}1
+{Є}{{\selectfont\char153}}1
+{Ґ}{{\selectfont\char128}}1
+}%
+\lstset{style=blackandwhite}
+%%% Listing for pseudocodes
+\lstdefinelanguage{pseudocode}{
+    morekeywords={
+            if,then,else,elseif,endif,
+            for,to,do,endfor,
+            while,endwhile,
+            repeat,until,
+            return,break,continue,
+            function,procedure,
+            input,output,
+            Input, Output,
+            and,or,not,
+            begin, end,
+            nil
+        },
+    sensitive=true,
+    morecomment=[l]{//},
+    morecomment=[l]{\#},
+    morestring=[b]"
+}
+\def\cmcmsu@KeywordStylePseudocode{%
+    \normalfont\fontsize{12pt}{14pt}\selectfont\bfseries\color{ListingEmph}%
+}
+\lstdefinestyle{pseudocode}{
+language=pseudocode,
+style=blackandwhite,
+keywordstyle=\cmcmsu@KeywordStylePseudocode,
+literate={Ö}{{\"O}}1
+{Ä}{{\"A}}1
+{Ü}{{\"U}}1
+{ß}{{\ss}}1
+{ü}{{\"u}}1
+{ä}{{\"a}}1
+{ö}{{\"o}}1
+{~}{{\textasciitilde}}1
+{а}{{\selectfont\char224}}1
+{б}{{\selectfont\char225}}1
+{в}{{\selectfont\char226}}1
+{г}{{\selectfont\char227}}1
+{д}{{\selectfont\char228}}1
+{е}{{\selectfont\char229}}1
+{ё}{{\"e}}1
+{ж}{{\selectfont\char230}}1
+{з}{{\selectfont\char231}}1
+{и}{{\selectfont\char232}}1
+{й}{{\selectfont\char233}}1
+{к}{{\selectfont\char234}}1
+{л}{{\selectfont\char235}}1
+{м}{{\selectfont\char236}}1
+{н}{{\selectfont\char237}}1
+{о}{{\selectfont\char238}}1
+{п}{{\selectfont\char239}}1
+{р}{{\selectfont\char240}}1
+{с}{{\selectfont\char241}}1
+{т}{{\selectfont\char242}}1
+{у}{{\selectfont\char243}}1
+{ф}{{\selectfont\char244}}1
+{х}{{\selectfont\char245}}1
+{ц}{{\selectfont\char246}}1
+{ч}{{\selectfont\char247}}1
+{ш}{{\selectfont\char248}}1
+{щ}{{\selectfont\char249}}1
+{ъ}{{\selectfont\char250}}1
+{ы}{{\selectfont\char251}}1
+{ь}{{\selectfont\char252}}1
+{э}{{\selectfont\char253}}1
+{ю}{{\selectfont\char254}}1
+{я}{{\selectfont\char255}}1
+{А}{{\selectfont\char192}}1
+{Б}{{\selectfont\char193}}1
+{В}{{\selectfont\char194}}1
+{Г}{{\selectfont\char195}}1
+{Д}{{\selectfont\char196}}1
+{Е}{{\selectfont\char197}}1
+{Ё}{{\"E}}1
+{Ж}{{\selectfont\char198}}1
+{З}{{\selectfont\char199}}1
+{И}{{\selectfont\char200}}1
+{Й}{{\selectfont\char201}}1
+{К}{{\selectfont\char202}}1
+{Л}{{\selectfont\char203}}1
+{М}{{\selectfont\char204}}1
+{Н}{{\selectfont\char205}}1
+{О}{{\selectfont\char206}}1
+{П}{{\selectfont\char207}}1
+{Р}{{\selectfont\char208}}1
+{С}{{\selectfont\char209}}1
+{Т}{{\selectfont\char210}}1
+{У}{{\selectfont\char211}}1
+{Ф}{{\selectfont\char212}}1
+{Х}{{\selectfont\char213}}1
+{Ц}{{\selectfont\char214}}1
+{Ч}{{\selectfont\char215}}1
+{Ш}{{\selectfont\char216}}1
+{Щ}{{\selectfont\char217}}1
+{Ъ}{{\selectfont\char218}}1
+{Ы}{{\selectfont\char219}}1
+{Ь}{{\selectfont\char220}}1
+{Э}{{\selectfont\char221}}1
+{Ю}{{\selectfont\char222}}1
+{Я}{{\selectfont\char223}}1
+{і}{{\selectfont\char105}}1
+{ї}{{\selectfont\char168}}1
+{є}{{\selectfont\char185}}1
+{ґ}{{\selectfont\char160}}1
+{І}{{\selectfont\char73}}1
+{Ї}{{\selectfont\char136}}1
+{Є}{{\selectfont\char153}}1
+{Ґ}{{\selectfont\char128}}1,
+escapeinside={(*@}{@*)},
+mathescape = true
+}%
+\newcommand{\lstInput}{%
+    \cmcmsu@KeywordStylePseudocode\translate{Input}%
+}
+\newcommand{\lstOutput}{%
+    \cmcmsu@KeywordStylePseudocode\translate{Output}%
+}
+\renewcommand{\lstlistingname}{\translate{Listing}}
+\RequirePackage{caption}
+\DeclareCaptionLabelSeparator{listingsep}{~---\ }%
+\DeclareCaptionLabelFormat{nonumber}{\bothIfFirst{##1}{\relax}}%
+\captionsetup[lstlisting]{%
+    format=plain,
+    labelformat=nonumber,
+    font=normal,
+    skip=\baselineskip,
+    parskip=0pt,
+    singlelinecheck=true,
+    justification=centerlast,
+    labelsep=listingsep
+}%
+\RequirePackage{chngcntr}
+\@ifundefined{c@chapter}{%
+    \AtBeginDocument{%
+        \@ifundefined{c@lstlisting}{}{%
+            \counterwithin{lstlisting}{section}%
+            \renewcommand{\thelstlisting}{\thesection.\arabic{lstlisting}}%
+        }%
+    }}{%
+    \AtBeginDocument{%
+        \@ifundefined{c@lstlisting}{}{%
+            \counterwithin{lstlisting}{chapter}%
+            \renewcommand{\thelstlisting}{\thechapter.\arabic{lstlisting}}%
+        }%
+    }
+}
+\ifx\cmcmsu@alg\cmcmsu@algtwoe%
+    \lstnewenvironment{lstpseudocode}[1][]%
+    {%
+        \let\c@lstlisting\c@algocf%
+        \let\thelstlisting\thealgocf%
+        \let\p@lstlisting\p@algocf%
+        \let\lstlistingname\algorithmcfname%
+        \def\ext@lstlisting{loa}%
+        \let\ftype@lstlisting\ftype@algocf%
+        \@ifundefined{theHalgocf}
+        {\def\theHlstlisting{alg.\thealgocf}}
+        {\edef\theHlstlisting{alg.\theHalgocf}}
+        \lstset{style=pseudocode, ##1}%
+    }%
+    {}
+\fi
+}
+
+\PassOptionsToPackage{%
+    ruled,
+    lined,
+    linesnumbered,
+    algosection
+}
+{algorithm2e}
+\newcommand{\cmcmsu@SetAlgorithms}{
+    \RequirePackage{algorithm2e}
+    %%% ============================================================
+    %%% Оформление algorithm2e в стиле lstpseudocode (Dracula Pro Alucard)
+    %%% ============================================================
+    \providecolor{ListingRule}{HTML}{D5D5D5}
+    \providecolor{ListingNumbers}{HTML}{4F4F4F}
+    \providecolor{ListingText}{HTML}{1F1F1F}
+    \providecolor{ListingBackground}{HTML}{F5F5F5}
+    \providecolor{ListingEmph}{HTML}{A3144D}
+    \providecolor{ListingComment}{HTML}{635D97}
+    \providecolor{ListingString}{HTML}{846E15}
+    \providecolor{ListingBuiltin}{HTML}{A34D14}
+    \providecolor{ListingType}{HTML}{644AC9}
+    \providecolor{ListingConstant}{HTML}{036A96}
+    \providecolor{ListingFunction}{HTML}{14710A}
+    % --- Шрифты и цвета ---
+    \SetAlFnt{\fontsize{12pt}{14pt}\selectfont\ttfamily\color{ListingText}}
+    %%% NB: ##1 — потому что мы внутри \newcommand{\cmcmsu@SetAlgorithms}
+    \newcommand{\cmcAlgoKw}[1]{%
+        \textnormal{\fontsize{12pt}{14pt}\selectfont\ttfamily\bfseries\color{ListingEmph}##1}}
+    \SetKwSty{cmcAlgoKw}
+    \newcommand{\cmcAlgoArg}[1]{%
+        \textnormal{\fontsize{12pt}{14pt}\selectfont\ttfamily\color{ListingText}##1}}
+    \SetArgSty{cmcAlgoArg}
+    \newcommand{\cmcAlgoFunc}[1]{%
+        \textnormal{\fontsize{12pt}{14pt}\selectfont\ttfamily\color{ListingFunction}##1}}
+    \SetFuncSty{cmcAlgoFunc}
+    \SetProcNameSty{cmcAlgoFunc}
+    \SetFuncArgSty{cmcAlgoArg}
+    \SetProcArgSty{cmcAlgoArg}
+    \SetDataSty{cmcAlgoArg}
+    \newcommand{\cmcAlgoComment}[1]{%
+        \textnormal{\fontsize{12pt}{14pt}\selectfont\ttfamily\color{ListingComment}##1}}
+    \SetCommentSty{cmcAlgoComment}
+    \newcommand{\cmcAlgoNl}[1]{%
+        \textnormal{\fontsize{12pt}{14pt}\selectfont\color{ListingNumbers}##1}}
+    \SetNlSty{cmcAlgoNl}{}{}
+    % --- Input / Output (чтобы \KwInput и \KwOutput были определены) ---
+    \SetKwInput{KwInput}{\translate{Input}}
+    \SetKwInput{KwOutput}{\translate{Output}}
+    % --- Геометрия и линии ---
+    \setlength{\algomargin}{1.5em}
+    \SetNlSkip{8pt}
+    \SetAlgoInsideSkip{smallskip}
+    \SetInd{0.5em}{1em}
+    \DontPrintSemicolon
+    \SetAlgoLined
+    % --- Подпись: «Алгоритм — Название» без номера ---
+    \SetAlgoCaptionSeparator{~\textemdash~}
+    \long\def\algocf@captiontext##1##2{%
+        \algorithmcfname\algocf@capseparator##2%
+    }
+
+    % --- Горизонтальные линии ruled — цвет ListingRule ---
+
+    \renewcommand{\@algocf@pre@ruled}{%
+        \vspace{0.4\baselineskip}%
+        {\color{ListingRule}\hrule height 0.8pt}%
+        \kern3pt%
+    }
+    \renewcommand{\@algocf@post@ruled}{%
+        \kern3pt%
+        {\color{ListingRule}\hrule height 0.8pt}%
+        \vspace{0.4\baselineskip}%
+    }
+    \SetAlgorithmName{%
+        \translate{Algorithm}}{%
+        \translate{Algorithm}}{%
+        \translate{List of Algorithms}}%
+
+}
+
+\cmcmsu@SetListings%
+\cmcmsu@SetAlgorithms%
+\resetcounteronoverlays{algocf}
+\resetcounteronoverlays{lstlisting}
+
 % Custom colors
 \definecolor{cmcmsuBlue}{RGB}{3,106,150}
 \definecolor{cmcmsuRed}{RGB}{203,58,42}
